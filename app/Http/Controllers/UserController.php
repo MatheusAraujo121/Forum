@@ -8,12 +8,13 @@ class UserController extends Controller
 {
     //camelCase
     //no_camel_case <<
-    public function listAllUsers(){
+    public function listAllUsers(Request $request){
         //lógica
         return view('users.listAllUsers');
     }
 
-    public function listUserByID(){
+    public function listUserByID(Request $request, $uid){
+        print($uid);
         return view('users.listUserByID');
     }
 
