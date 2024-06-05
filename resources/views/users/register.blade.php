@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tela de Login</title>
+<title>Tela de Cadastro</title>
 <style>
     body {
       margin: 0;
@@ -157,17 +157,28 @@
         width: 50%;
       }
       .label{
-        width: 25%;
+        width: 50%;
       }
 </style>
 </head>
 <body>
 <div class="container">
-  <form action="{{route('login')}}" method="POST" class="login-form">
+  <form action="{{route('register')}}" method="POST" class="login-form">
     @csrf
-    <h2>Login</h2>
+    <h2>Cadastre-se</h2>
     <div class="wave-group">
-        <input type="email" id="email" name="email" class="input" value="{{old('email')}}" required>
+        <input type="name" id="name" name="name" class="input" value="{{old('name')}}" required>
+        @error('name') <span>{{ $message }}</span> @enderror
+        <span class="bar"></span>
+            <label for="name" class="label">
+                <span class="label-char" style="--index: 0">N</span>
+                <span class="label-char" style="--index: 1">o</span>
+                <span class="label-char" style="--index: 2">m</span>
+                <span class="label-char" style="--index: 3">e</span>
+            </label>
+    </div>
+    <div class="wave-group">
+        <input type="Email" id="email" name="email" class="input" value="{{old('email')}}" required>
         @error('email') <span>{{ $message }}</span> @enderror
         <span class="bar"></span>
             <label for="email" class="label">
@@ -190,8 +201,29 @@
                 <span class="label-char" style="--index: 4">a</span>
             </label>
     </div>
+    <div class="wave-group">
+        <input type="password" id="password_confirmation" name="password_confirmation" class="input" required>
+        <span class="bar"></span>
+            <label for="password_confirmation" class="label">
+                <span class="label-char" style="--index: 0">C</span>
+                <span class="label-char" style="--index: 1">o</span>
+                <span class="label-char" style="--index: 2">n</span>
+                <span class="label-char" style="--index: 3">f</span>
+                <span class="label-char" style="--index: 4">i</span>
+                <span class="label-char" style="--index: 5">r</span>
+                <span class="label-char" style="--index: 6">m</span>
+                <span class="label-char" style="--index: 7">a</span>
+                <span class="label-char" style="--index: 8">r</span>
+                <span class="label-char" style="--index: 9">&nbsp</span>
+                <span class="label-char" style="--index: 10">S</span>
+                <span class="label-char" style="--index: 11">e</span>
+                <span class="label-char" style="--index: 12">n</span>
+                <span class="label-char" style="--index: 13">h</span>
+                <span class="label-char" style="--index: 14">a</span>
+            </label>
+    </div>
     <br>
-    <button type="submit">Entrar</button>
+    <button type="submit" value="Registrar">Cadastrar</button>
   </form>
 </div>
 </body>
