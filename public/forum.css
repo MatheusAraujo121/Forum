@@ -1,0 +1,245 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #777777;
+  }
+
+  header {
+    background-color: #6fb98f; /* verde mais escuro */
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    animation: fadeInDown 1s ease;
+  }
+
+  nav {
+    background-color: #8ac4af; /* verde médio */
+    color: #fff;
+    width: 200px;
+    position: fixed;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+    animation: slideInLeft 1s ease;
+  }
+
+  nav ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  nav ul li {
+    padding: 10px;
+  }
+
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+
+  .container {
+    width: 260px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .login-form {
+    text-align: center;
+  }
+
+  .login-form h2 {
+    margin-bottom: 30px;
+    color: #333;
+  }
+
+  .input-field {
+    margin-bottom: 20px;
+    position: relative;
+    right: 10px;
+  }
+
+  .input-field input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+  }
+
+  .input-field input:focus {
+    outline: none;
+    border-color: #3498db;
+  }
+
+  .input-field label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    background-color: #fff;
+    padding: 0 5px;
+    color: #999;
+    font-size: 16px;
+    pointer-events: none;
+    transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+  }
+
+  .input-field input:focus + label, .input-field input:valid + label {
+    top: -10px;
+    font-size: 12px;
+    color: #3498db;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #2980b9;
+  }
+  .wave-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+    
+    .wave-group .input {
+      font-size: 16px;
+      padding: 10px 10px 10px 5px;
+      display: block;
+
+      border: none;
+      border-bottom: 1px solid #515151;
+      background: transparent;
+    }
+    
+    .wave-group .input:focus {
+      outline: none;
+    }
+    
+    .wave-group .label {
+      color: #999;
+      font-size: 18px;
+      font-weight: normal;
+      position: absolute;
+      pointer-events: none;
+      left: 5px;
+      top: 10px;
+      display: flex;
+    }
+    
+    .wave-group .label-char {
+      transition: 0.2s ease all;
+      transition-delay: calc(var(--index) * .05s);
+    }
+    
+    .wave-group .input:focus ~ label .label-char,
+    .wave-group .input:valid ~ label .label-char {
+      transform: translateY(-20px);
+      font-size: 14px;
+      color: #5264AE;
+    }
+    
+    .wave-group .bar {
+      position: relative;
+      display: block;
+    }
+    
+    .wave-group .bar:before,.wave-group .bar:after {
+      content: '';
+      height: 2px;
+      width: 0;
+      bottom: 1px;
+      position: absolute;
+      background: #5264AE;
+      transition: 0.2s ease all;
+      -moz-transition: 0.2s ease all;
+      -webkit-transition: 0.2s ease all;
+    }
+    
+    .wave-group .bar:before {
+      left: 31%;
+    }
+    
+    .wave-group .bar:after {
+      right: 50%;
+    }
+    
+    .wave-group .input:focus ~ .bar:before,
+    .wave-group .input:focus ~ .bar:after {
+      width: 50%;
+    }
+    .label{
+      width: 50%;
+    }
+
+  footer {
+    background-color: #6fb98f; /* verde mais escuro */
+    color: #fff;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    animation: fadeInUp 1s ease;
+  }
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+ 

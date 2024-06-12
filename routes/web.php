@@ -25,6 +25,14 @@ Route::middleware('auth')->group(function(){
     Route::get('/users/{uid}', 
         [UserController::class,'listUserByID']
     )->name('routeListUserByID');
+
+    Route::put('/users/{uid}/update', 
+        [UserController::class,'updateUser']
+    )->name('UpdateUser');
+
+    Route::delete('/users/{uid}/delete', 
+        [UserController::class,'deleteUser']
+    )->name('DeleteUser');
 });
 
 //User routes
