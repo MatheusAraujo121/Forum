@@ -35,8 +35,12 @@ Route::middleware('auth')->group(function(){
     )->name('DeleteUser');
 });
 
+//Welcome route
+Route::get('/', function () {
+    return view('welcome');
+})->name('FisrtPage');
+
 //User routes
 
-Route::get('/users/ID/edit', [UserController::class,'updateUser'])->name('routeUpdateUser');
-Route::get('/users/ID/delete', [UserController::class,'deleteUser'])->name('routeDeleteUser');
-
+//Route::get('/users/ID/edit', [UserController::class,'updateUser'])->name('routeUpdateUser');
+//Route::get('/users/ID/delete', [UserController::class,'deleteUser'])->name('routeDeleteUser');

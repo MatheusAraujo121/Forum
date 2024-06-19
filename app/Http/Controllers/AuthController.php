@@ -28,7 +28,7 @@ class AuthController extends Controller
     public function logoutUser(){
         Auth::logout();
         return redirect()
-                ->route('login')
+                ->route('FisrtPage')
                 ->with('Success','Logout realizado com successo.');
     }
 }
