@@ -541,14 +541,12 @@ hr{
   color: white;
   font-size: 350%;
   font-weight: 500;
-  white-space: nowrap;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  margin-top: 10%;
+
+  margin-top: 15%;
+  margin-left: 2%;
 }
 .bx-menu:hover{
-  color: black;
+  color: rgb(120, 120, 120);
 
 }
 .centered2{
@@ -556,4 +554,50 @@ hr{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.bxs-bell{
+  color: white;
+  font-size: 200%;
+  font-weight: 500;
+  white-space: nowrap;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-top: 100%;
+  margin-left: 400%;
+
+}
+.menu-profile{
+  color: white;
+  font-size: 130%;
+  font-weight: 500;
+  white-space: nowrap;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-left: 15%;
+  
+}
+@media (max-width: 925px) {
+  .bxs-bell{
+    color: white;
+    font-size: 200%;
+    font-weight: 500;
+    white-space: nowrap;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-top: 100%;
+    margin-left: 40%;
+  }
+  .menu-profile{
+    color: white;
+    font-size: 130%;
+    font-weight: 500;
+    white-space: nowrap;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-right: 10%;
+  }
 }

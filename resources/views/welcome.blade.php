@@ -4,5 +4,10 @@
 @section('header', 'ThunderDevs')
 
 @section('content')
-  <h1>Bem-vindo!, faça login para continuar :D</h1>
+@if(Auth::check())
+  <h1>Bem-vindo! {{ Auth::user()->name }}</h1>
+@endif
+@if(Auth::guest())
+  <h1>Bem-vindo! faça login para continuar :D</h1>
+@endif
 @endsection

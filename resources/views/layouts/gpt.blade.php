@@ -21,63 +21,79 @@
         </div>
         <ul class="nav-links">
             <li>
-              <a href="{{ url('/login') }}">
-                <i class='bx bx-grid-alt' ></i>
-                <span class="link_name">Topicos</span>
+              <div class="iocn-link">
+                <a href="#">
+                  <i class="fa-solid fa-bookmark"></i>
+                  <span class="link_name">Tópicos</span>
+                </a>
+                <i class='bx bxs-chevron-down arrow' ></i>
+              </div>
+              <ul class="sub-menu">
+                <li>
+                  <a class="link_name" href="#">Tópicos</a>
+                </li>
+                <li>
+                  <a href="#">Criar novo tópico</a>
+                </li>
+                <li>
+                  <a href="#">Visualizar tópicos</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#">
+                <!--<i class='bx bx-line-chart' ></i>-->
+                <i class="fa-solid fa-arrow-trend-up"></i>
+                <span class="link_name">Em alta</span>
               </a>
               <ul class="sub-menu blank">
                 <li>
-                  <a class="link_name" href="#">Topicos em alta</a>
+                  <a class="link_name" href="#">Tópicos em alta</a>
                 </li>
               </ul>
             </li>
             <li>
               <div class="iocn-link">
                 <a href="#">
-                  <i class='bx bx-collection' ></i>
-                  <span class="link_name">asd</span>
+                  <!--<i class='bx bx-collection' ></i>-->
+                  <i class="fa-solid fa-tags"></i>
+                  <span class="link_name">Tags</span>
                 </a>
                 <i class='bx bxs-chevron-down arrow' ></i>
               </div>
               <ul class="sub-menu">
                 <li>
-                  <a class="link_name" href="#">asd</a>
+                  <a class="link_name" href="#">Tags</a>
                 </li>
                 <li>
-                  <a href="#">HTML & CSS</a>
+                  <a href="#">Criar nova tag</a>
                 </li>
                 <li>
-                  <a href="#">JavaScript</a>
-                </li>
-                <li>
-                  <a href="#">PHP & MySQL</a>
+                  <a href="#">Visualizar tags</a>
                 </li>
               </ul>
             </li>
             <li>
               <div class="iocn-link">
                 <a href="#">
-                  <i class='bx bx-book-alt' ></i>
-                  <span class="link_name">Posts</span>
+                  <i class='bx bxs-book-alt' ></i>
+                  <span class="link_name">Postagens</span>
                 </a>
                 <i class='bx bxs-chevron-down arrow' ></i>
               </div>
               <ul class="sub-menu">
                 <li>
-                  <a class="link_name" href="#">Posts</a>
+                  <a class="link_name" href="#">Postagens</a>
                 </li>
                 <li>
-                  <a href="#">Web Design</a>
+                  <a href="#">Criar nova postagem</a>
                 </li>
                 <li>
-                  <a href="#">Login Form</a>
-                </li>
-                <li>
-                  <a href="#">Card Design</a>
+                  <a href="#">ver minhas postagens</a>
                 </li>
               </ul>
             </li>
-            <li>
+            <!--<li>
               <a href="#">
                 <i class='bx bx-pie-chart-alt-2' ></i>
                 <span class="link_name">Analytics</span>
@@ -87,42 +103,18 @@
                   <a class="link_name" href="#">Analytics</a>
                 </li>
               </ul>
-            </li>
-            <li>
-              <a href="#">
-                <i class='bx bx-line-chart' ></i>
-                <span class="link_name">Chart</span>
-              </a>
-              <ul class="sub-menu blank">
-                <li>
-                  <a class="link_name" href="#">Chart</a>
-                </li>
-              </ul>
-            </li>
+            </li>-->
+
             <li>
               <div class="iocn-link">
                 <a href="#">
-                  <i class='bx bx-plug' ></i>
-                  <span class="link_name">Plugins</span>
+                  <!--<i class='bx bx-plug' ></i>-->
+                  <i class="fa-solid fa-users"></i>
+                  <span class="link_name">Usuários</span>
                 </a>
-                <i class='bx bxs-chevron-down arrow' ></i>
               </div>
-              <ul class="sub-menu">
-                <li>
-                  <a class="link_name" href="#">Plugins</a>
-                </li>
-                <li>
-                  <a href="#">UI Face</a>
-                </li>
-                <li>
-                  <a href="#">Pigments</a>
-                </li>
-                <li>
-                  <a href="#">Box Icons</a>
-                </li>
-              </ul>
             </li>
-            <li>
+            <!--<li>
               <a href="#">
                 <i class='bx bx-compass' ></i>
                 <span class="link_name">Explore</span>
@@ -132,8 +124,8 @@
                   <a class="link_name" href="#">Explore</a>
                 </li>
               </ul>
-            </li>
-            <li>
+            </li>-->
+            <!--<li>
               <a href="#">
                 <i class='bx bx-history'></i>
                 <span class="link_name">History</span>
@@ -143,7 +135,7 @@
                   <a class="link_name" href="#">History</a>
                 </li>
               </ul>
-            </li>
+            </li>-->
             <li>
               <a href="#">
                 <i class='bx bx-cog' ></i>
@@ -159,9 +151,12 @@
               <hr>
             @if(Auth::check())
               <div class="profile-details">
-                <div class="profile-content">
-                  <!--<img src="image/profile.jpg" alt="profileImg">-->
-                </div>
+                <a href="{{ route('routeListUserByID', [Auth::user()->id]) }}">
+                  <div class="profile-content">
+                    <!--<img src="image/profile.jpg" alt="profileImg">-->
+                    <i class="fa-solid fa-user"></i>
+                  </div>
+                </a>
                 <div class="name-job">
                   <div class="profile_name">{{ Auth::user()->name }}</div>
                   <div class="job">Admin</div>
@@ -181,9 +176,11 @@
       </div>
       <section class="home-section">
         <div class="navbar">
-          <div class="logo-details">
-            <img class="logo-img" src="{{ asset('img/logo.png') }}" />
-          </div>
+          <a href="{{ url('/') }}">
+            <div class="logo-details">
+              <img class="logo-img" src="{{ asset('img/logo.png') }}" />
+            </div>
+          </a>
           <ul class="navbar-links">
             <div class="home-content">
               <div class="menu">
@@ -210,6 +207,25 @@
               </label>
             </form>
           </div>
+          <div>
+            <i class='bx bxs-bell'></i>
+          </div>
+          @if(Auth::check())
+          <div class="menu-profile">
+            <a class="menu-profile" href="{{ route('routeListUserByID', [Auth::user()->id]) }}">
+              <!--<img src="image/profile.jpg" alt="profileImg">-->
+              <i class="fa-solid fa-user"></i>
+            </a>
+            <!--<i class='bx bxs-chevron-down arrow' ></i>-->
+          </div>
+          @endif
+          @if(Auth::guest())
+            <a class=""href="{{ url('/login') }}">
+              <div class="">
+                Faça login
+              </div>
+            </a>
+            @endif
         </div>
         <div class="centered background">
           <div class="content">
