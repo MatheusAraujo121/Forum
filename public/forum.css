@@ -1,6 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 .background{
-  background-color: #635e8f;
+  background-color: #283542;
+}
+.background-liop{
+  background-color: #283542;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 *{
   margin: 0;
@@ -185,7 +192,7 @@
   background: none;
 }
 .sidebar.close .profile-details{
-  width: 78px;
+  width: 65px;
 }
 .sidebar .profile-details .profile-content{
   display: flex;
@@ -533,7 +540,7 @@ hr{
 .logo-img{
   margin-top: 3%;
   max-width: 100%; 
-  max-height: 75px; 
+  max-height: 78px; 
   width: auto; 
   height: auto;
 }
@@ -568,7 +575,7 @@ hr{
 
 }
 .menu-profile{
-  color: white;
+  color: white;/*343458, 434370, 283542*/
   font-size: 130%;
   font-weight: 500;
   white-space: nowrap;
@@ -577,6 +584,15 @@ hr{
   display: flex;
   margin-left: 15%;
   
+}
+.lgn-2{
+  display: flex;
+  margin-top: 5px;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10%;
+  text-decoration: none; 
+  color: inherit;
 }
 @media (max-width: 925px) {
   .bxs-bell{
@@ -590,6 +606,15 @@ hr{
     margin-top: 100%;
     margin-left: 40%;
   }
+  .lgn-2{
+    display: flex;
+    margin-top: 5px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5%;
+    text-decoration: none; 
+    color: inherit;
+  }
   .menu-profile{
     color: white;
     font-size: 130%;
@@ -598,6 +623,265 @@ hr{
     align-items: center;
     justify-content: center;
     display: flex;
-    margin-right: 10%;
+    margin-left: 10%;
   }
+}
+.btn-register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-left: 12%;
+  margin-right: 10%;
+  padding: 5px 10px;
+  border-radius: 7px;
+  border: 1px solid rgb(32, 42, 68);
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 2px;
+  background: transparent;
+  color: #fff;
+  overflow: hidden;
+  box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+.btn-register:hover {
+  background: rgb(32, 42, 68);
+  box-shadow: 0 0 30px 5px rgba(48, 67, 108, 0.815);
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+.btn-register:hover::before {
+  -webkit-animation: sh02 0.5s 0s linear;
+  -moz-animation: sh02 0.5s 0s linear;
+  animation: sh02 0.5s 0s linear;
+}
+
+.btn-register::before {
+  justify-content: center;
+  align-items: center;
+  content: '';
+  display: block;
+  width: 0px;
+  height: 86%;
+  position: relative;
+  top: 7%;
+  left: 0%;
+  opacity: 0;
+  background: #fff;
+  box-shadow: 0 0 50px 30px #fff;
+  -webkit-transform: skewX(-20deg);
+  -moz-transform: skewX(-20deg);
+  -ms-transform: skewX(-20deg);
+  -o-transform: skewX(-20deg);
+  transform: skewX(-20deg);
+}
+
+@keyframes sh02 {
+  from {
+    opacity: 0;
+    left: 0%;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    left: 100%;
+  }
+}
+.Btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 40px;
+  height: 40px;
+  margin-left: 3%;
+  margin-right: 10%;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: .3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background-color: rgb(255, 65, 65);
+}
+
+.sign {
+  width: 100%;
+  transition-duration: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign svg {
+  width: 15px;
+}
+
+.sign svg path {
+  fill: white;
+}
+.text {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 600;
+  transition-duration: .3s;
+}
+.Btn:hover {
+  width: 125px;
+  border-radius: 40px;
+  transition-duration: .3s;
+}
+
+.Btn:hover .sign {
+  width: 30%;
+  transition-duration: .3s;
+  padding-left: 20px;
+}
+.Btn:hover .text {
+  opacity: 1;
+  width: 70%;
+  transition-duration: .3s;
+  padding-right: 10px;
+}
+.Btn:active {
+  transform: translate(2px ,2px);
+}
+.form-container {
+  width: 320px;
+  border-radius: 0.75rem;
+  background-color: rgba(17, 24, 39, 1);
+  padding: 2rem;
+  margin: 8%;
+  color: rgba(243, 244, 246, 1);
+}
+
+.titles {
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+
+.formd {
+  margin-top: 1.5rem;
+}
+
+.input-group {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.input-group label {
+  display: block;
+  color: rgba(156, 163, 175, 1);
+  margin-bottom: 4px;
+}
+
+.input-group input {
+  width: 100%;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(55, 65, 81, 1);
+  outline: 0;
+  background-color: rgba(17, 24, 39, 1);
+  padding: 0.75rem 1rem;
+  color: rgba(243, 244, 246, 1);
+}
+
+.input-group input:focus {
+  border-color: rgba(167, 139, 250);
+}
+
+.forgot {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: rgba(156, 163, 175,1);
+  margin: 8px 0 14px 0;
+}
+
+.forgot a,.signup a {
+  color: rgba(243, 244, 246, 1);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.forgot a:hover, .signup a:hover {
+  text-decoration: underline rgba(167, 139, 250, 1);
+}
+
+.signs {
+  display: block;
+  width: 100%;
+  background-color: rgba(167, 139, 250, 1);
+  padding: 0.75rem;
+  text-align: center;
+  color: rgba(17, 24, 39, 1);
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 600;
+}
+.signs:hover{
+  background-color: rgb(126, 82, 255);
+}
+
+.social-message {
+  display: flex;
+  align-items: center;
+  padding-top: 1rem;
+}
+
+.line {
+  height: 1px;
+  flex: 1 1 0%;
+  background-color: rgba(55, 65, 81, 1);
+}
+
+.social-message .message {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: rgba(156, 163, 175, 1);
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+}
+
+.social-icons .icon {
+  border-radius: 0.125rem;
+  padding: 0.75rem;
+  border: none;
+  background-color: transparent;
+  margin-left: 8px;
+}
+
+.social-icons .icon svg {
+  height: 1.25rem;
+  width: 1.25rem;
+  fill: #fff;
+}
+
+.signup {
+  text-align: center;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: rgba(156, 163, 175, 1);
 }

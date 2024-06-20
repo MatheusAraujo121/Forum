@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function(){
 //Welcome route
 Route::get('/', function () {
     return view('welcome');
-})->name('FisrtPage');
+})->name('FirstPage');
 
 //User routes
 

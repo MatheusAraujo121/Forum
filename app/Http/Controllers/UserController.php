@@ -68,7 +68,7 @@ class UserController extends Controller
 
             Auth::login($user);
 
-            return redirect()->route('routeListAllUsers');
+            return redirect()->route('FirstPage');
         }
     }
 
