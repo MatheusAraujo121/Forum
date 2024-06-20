@@ -8,10 +8,14 @@
         <tr>
             <th> Nome </th>
             <th> Email </th>
+            <th> Opções </th>
         </tr>
+        @foreach ($users as $user)
         <tr>
-            <td>Fulano</td>
+            <td>{{$user->name}}</td>
+            <td>{{$user->email}}</td>
             <td>fulano@gmail.com</td>
         </tr>
+        @endforeach
     </table>   
 @endsection

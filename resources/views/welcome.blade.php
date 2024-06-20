@@ -5,9 +5,9 @@
 
 @section('content')
 @if(Auth::check())
-  <h1>Bem-vindo! {{ Auth::user()->name }}!</h1>
+  <h1 class="welcome-text">Bem-vindo! {{ Auth::user()->name }}!</h1>
 @endif
 @if(Auth::guest())
-  <h1>Bem-vindo! faça login para continuar :D</h1>
+  <h1 class="welcome-text">Bem-vindo! faça login para continuar :D</h1>
 @endif
 @endsection

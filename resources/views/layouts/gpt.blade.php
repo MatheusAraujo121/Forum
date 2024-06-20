@@ -33,7 +33,7 @@
                 </li>
                 @if(Auth::check())
                   <li>
-                    <a href="#">Criar novo tópico</a>
+                    <a href="{{ url('/newtopic') }}">Criar novo tópico</a>
                   </li>
                 @endif
                 <li>
@@ -68,7 +68,7 @@
                 </li>
                 @if(Auth::check())
                   <li>
-                    <a href="#">Criar nova tag</a>
+                    <a href="{{ url('/newtag') }}">Criar nova tag</a>
                   </li>
                 @endif
                 <li>
@@ -90,7 +90,7 @@
                     <a class="link_name" href="#">Postagens</a>
                   </li>
                   <li>
-                    <a href="#">Criar nova postagem</a>
+                    <a href="{{ url('/newpost') }}">Criar nova postagem</a>
                   </li>
                   <li>
                     <a href="#">ver minhas postagens</a>
@@ -178,7 +178,7 @@
               <hr>
             @if(Auth::check())
               <div class="profile-details">
-                <a href="{{ route('routeListUserByID', [Auth::user()->id]) }}">
+                <a href="{{ route('routeListUserByIDS', [Auth::user()->id]) }}">
                   <div class="profile-content">
                     <!--<img src="image/profile.jpg" alt="profileImg">-->
                     <i class="fa-solid fa-user"></i>
@@ -249,7 +249,7 @@
           </div>
           @if(Auth::check())
           <div class="menu-profile">
-            <a class="menu-profile" href="{{ route('routeListUserByID', [Auth::user()->id]) }}">
+            <a class="menu-profile" href="{{ route('routeListUserByIDS', [Auth::user()->id]) }}">
               <!--<img src="image/profile.jpg" alt="profileImg">-->
               <i class="fa-solid fa-user"></i>
             </a>

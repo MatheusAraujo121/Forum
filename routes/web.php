@@ -22,8 +22,12 @@ Route::middleware('auth')->group(function(){
         [UserController::class,'listAllUsers']
     )->name('routeListAllUsers');
     
-    Route::get('/users/{uid}', 
+    Route::get('/users/{uid}/profile', 
         [UserController::class,'listUserByID']
+    )->name('routeListUserByIDS');
+
+    Route::get('/users/{uid}', 
+        [UserController::class,'listUserByIDS']
     )->name('routeListUserByID');
 
     Route::put('/users/{uid}/update', 
@@ -34,6 +38,21 @@ Route::middleware('auth')->group(function(){
         [UserController::class,'deleteUser']
     )->name('DeleteUser');
 });
+
+//Tópic routes
+Route::get('/newtopic', function () {
+    return view('topics.createTopic');
+})->name('newTopic');
+
+//Tag routes
+Route::get('/newtag', function () {
+    return view('tags.createTag');
+})->name('newTag');
+
+//Post routes
+Route::get('/newpost', function () {
+    return view('posts.createPost');
+})->name('newPost');
 
 //Welcome route
 Route::get('/', function () {

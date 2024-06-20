@@ -13,11 +13,17 @@ class UserController extends Controller
     //camelCase
     //no_camel_case <<
     public function listAllUsers(Request $request){
-        //lógica
-        return view('users.listAllUsers');
+        $users = User::all();
+        return view('users.listAllUsers', ['users' => $users]);
     }
 
     public function listUserByID(Request $request, $uid){
+        //procurar o usuário no banco 
+        $user = User::where('id', $uid)->first();
+        return view('users.infoUser', ['user' => $user]);
+    }
+    
+    public function listUserByIDS(Request $request, $uid){
         //procurar o usuário no banco 
         $user = User::where('id', $uid)->first();
         return view('users.profile', ['user' => $user]);
@@ -25,26 +31,26 @@ class UserController extends Controller
 
     public function updateUser(Request $request, $uid){
         //procurar o usuário no banco 
-        $user = User::where('id', $uid)->first();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        if($request->password != ''){
-            $user->password = Hash::make($request->password);
-        }
-        $request->validate([
-            'name'=> 'string|max:255',
-            'email'=> 'string|email|max:255',
-            'password'=> 'string|min:8|confirmed'
-        ]);
-        $user->save();
-        return redirect()->route('routeListUserByID', [$user -> id])
-                ->with('message', 'Atualizado com sucesso!');
+            $user = User::where('id', $uid)->first();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            if($request->password != ''){
+                $user->password = Hash::make($request->password);
+            }
+            $request->validate([
+                'name'=> 'string|max:255',
+                'email'=> 'string|email|max:255',
+                'password'=> 'string|min:8|confirmed|nullable'
+            ]);
+            $user->save();
+            return redirect()->route('routeListUserByIDS', [$user -> id])
+                    ->with('message', 'Atualizado com sucesso!');
     }
 
     public function deleteUser(Request $request, $uid){
         $user = User::where('id', $uid)->delete();
 
-        return redirect()->route('routeListAllUsers')
+        return redirect()->route('FirstPage')
                 ->with('message', 'Deletado com sucesso!');
     }
 
