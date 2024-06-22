@@ -20,8 +20,8 @@ class AuthController extends Controller
                         ->intended('/')
                         ->with('Success','Login realizado com successo.');
             }
-            return back()->withErrors([
-                'email'=> 'Credenciais inválidas.',
+            return back()->with([
+                'message'=> 'Credenciais inválidas.',
             ])->withInput();
         }
     }
@@ -29,6 +29,6 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()
                 ->route('FirstPage')
-                ->with('Success','Logout realizado com successo.');
+                ->with('message','Logout realizado com successo.');
     }
 }

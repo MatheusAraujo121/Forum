@@ -1,8 +1,8 @@
 @extends('layouts.liop')
 
-@section('title', 'Nova tag')
+@section('title', 'Editar tag')
 
-@section('FormTitle', 'Criar nova tag')
+@section('FormTitle', 'Editar tag')
 
 @section('content')
 
@@ -16,6 +16,6 @@
           <input type="tita" id="tita" name="tita" value="">
         </div>
         <br>
-        <button type="submit" class="signs">Criar</button>
+        <button type="submit" class="signs">Atualizar</button>
       </form> 
 @endsection

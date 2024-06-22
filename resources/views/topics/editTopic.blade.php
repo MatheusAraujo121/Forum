@@ -1,8 +1,8 @@
 @extends('layouts.liop')
 
-@section('title', 'Novo tópico')
+@section('title', 'Editar tópico')
 
-@section('FormTitle', 'Criar novo tópico')
+@section('FormTitle', 'Editar tópico')
 
 @section('content')
 
@@ -20,6 +20,6 @@
           <input type="tags" id="tags" name="tags" value="">
         </div>
         <br>
-        <button type="submit" class="signs">Criar</button>
+        <button type="submit" class="signs">Atualizar</button>
       </form> 
 @endsection

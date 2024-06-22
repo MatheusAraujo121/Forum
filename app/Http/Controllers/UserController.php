@@ -16,6 +16,10 @@ class UserController extends Controller
         $users = User::all();
         return view('users.listAllUsers', ['users' => $users]);
     }
+    public function listUsersComplaint(Request $request){
+        $users = User::all();
+        return view('users.complaintUser', ['users' => $users]);
+    }
 
     public function listUserByID(Request $request, $uid){
         //procurar o usuário no banco 

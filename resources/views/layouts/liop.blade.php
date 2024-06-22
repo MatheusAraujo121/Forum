@@ -33,6 +33,7 @@
     <div class="form-container">
       
       <p class="titles">@yield('FormTitle')</p>
+      <br><span class="centered">{{ session('message') }}</span><br>
       @yield('content')
     </div>
     <script src="{{ asset('javascript.js') }}"></script>

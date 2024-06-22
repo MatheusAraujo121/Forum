@@ -35,9 +35,12 @@
                   <li>
                     <a href="{{ url('/newtopic') }}">Criar novo tópico</a>
                   </li>
+                  <li>
+                    <a href="{{ url('/edittopic') }}">Editar tópico</a>
+                  </li>
                 @endif
                 <li>
-                  <a href="#">Visualizar tópicos</a>
+                  <a href="{{ url('/viewtopic') }}">Visualizar tópicos</a>
                 </li>
               </ul>
             </li>
@@ -70,9 +73,12 @@
                   <li>
                     <a href="{{ url('/newtag') }}">Criar nova tag</a>
                   </li>
+                  <li>
+                    <a href="{{ url('/edittag') }}">Editar tag</a>
+                  </li>
                 @endif
                 <li>
-                  <a href="#">Visualizar tags</a>
+                  <a href="{{ url('/viewtag') }}">Visualizar tags</a>
                 </li>
               </ul>
             </li>
@@ -93,7 +99,10 @@
                     <a href="{{ url('/newpost') }}">Criar nova postagem</a>
                   </li>
                   <li>
-                    <a href="#">ver minhas postagens</a>
+                    <a href="{{ url('/editpost') }}">Editar postagem</a>
+                  </li>
+                  <li>
+                    <a href="{{ url('/viewpost') }}">ver minhas postagens</a>
                   </li>
                 </ul>
               </li>
@@ -113,7 +122,7 @@
               @if(Auth::user()->id == 1)
               <li>
                 <div class="iocn-link">
-                  <a href="#">
+                  <a href="{{ url('/users') }}">
                     <!--<i class='bx bx-plug' ></i>-->
                     <i class="fa-solid fa-users"></i>
                     <span class="link_name">Usuários</span>
@@ -149,7 +158,7 @@
             @if(Auth::check())
               @if(Auth::user()->id == 1)
                 <li>
-                  <a href="#">
+                  <a href="{{ url('/report') }}">
                     <i class="fa-solid fa-triangle-exclamation"></i>
                     <span class="link_name">Denúncias</span>
                   </a>
@@ -265,7 +274,9 @@
           @endif
         </div>
         <div class="centered background">
+        
           <div class="content">
+          <h4 class="centered green">{{ session('message') }}</h4><br><br>
             @yield('content')
           </div>
         </div>

@@ -1,21 +1,26 @@
 @extends('layouts.gpt')
 
+@section('title', 'Usuários')
+
 @section('header', 'Listar todos os usuários')
 
 @section('content')
-
-    <table border="1">
-        <tr>
-            <th> Nome </th>
-            <th> Email </th>
-            <th> Opções </th>
-        </tr>
-        @foreach ($users as $user)
-        <tr>
-            <td>{{$user->name}}</td>
-            <td>{{$user->email}}</td>
-            <td>fulano@gmail.com</td>
-        </tr>
-        @endforeach
-    </table>   
+<h1 class="welcome-text centered">Lista de usuários</h1>
+<br><br><br><br>
+        <table>
+            <thead>
+                <tr>
+                <th>ID
+                <th>Nome
+                <th>Email
+            </thead>
+            <tbody>
+            @foreach ($users as $user)
+                <tr>
+                <td>{{$user->id}}
+                <td>{{$user->name}}
+                <td>{{$user->email}}
+                @endforeach
+            </tbody>
+        </table>
 @endsection

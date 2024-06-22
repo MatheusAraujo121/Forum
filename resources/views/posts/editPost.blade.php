@@ -1,8 +1,8 @@
 @extends('layouts.liop')
 
-@section('title', 'Nova postagem')
+@section('title', 'Editar postagem')
 
-@section('FormTitle', 'Escrever nova postagem')
+@section('FormTitle', 'Editar postagem')
 
 @section('content')
       <form class="formd" action="" method="POST">
@@ -24,6 +24,6 @@
           
         </div>
         <br>
-        <button type="submit" class="signs">Postar</button>
+        <button type="submit" class="signs">Re-postar</button>
       </form> 
 @endsection
