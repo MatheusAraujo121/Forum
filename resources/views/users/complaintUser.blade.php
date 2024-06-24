@@ -22,17 +22,20 @@
                 <td>{{$user->name}}
                 <td>{{$user->email}}
                 @if($user->id!=1)
-                <td><div class="opc">
-                <button class="buttonsd tooltip">
-                <i class="fa-solid fa-user-clock"></i>
+                <td>
+                    <div class="opc">
+                        <button class="buttonsd tooltip">
+                            <i class="fa-solid fa-user-clock"></i>
                             <span class="tooltiptext">Suspender</span>
                         </button>
-                    <a href="{{url('/delconf')}}" method="POST" class="lgn-3">
-                        <button class="buttonsd tooltip">
-                            <i class="fa-solid fa-ban"></i>
-                            <span class="tooltiptext">Banir</span>
-                        </button>
-</a>
+                        <form action="{{route('DeleteUser', [$user->id])}}" method="POST" class="login-form">
+                            @csrf
+                            @method('delete')
+                            <button class="buttonsd tooltip">
+                                <i class="fa-solid fa-ban"></i>
+                                <span class="tooltiptext">Banir</span>
+                            </button>
+                        </form>    
                     </div>
                 @endif
                 @endforeach

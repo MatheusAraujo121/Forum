@@ -264,19 +264,17 @@
 .menu{
   color:white;
 }
-/*Estilo do menu de navegação*/
+
 .navbar {
   background-color: #11101d;
   padding: 0.3%;
   display: flex;
 }
 
-/*Botão de troca de forma de navegação (Vulgo menu aberto/fechado)*/
 .navbar-toggle {
   display: none;
 }
 
-/*Botões de navegação*/
 .navbar-links {
   display: flex;
   flex-direction: column;
@@ -290,7 +288,6 @@
   margin-bottom: 1rem;
 }
 
-/*Barra de pesquisa*/
 .formv {
   --input-text-color: #fff;
   --input-bg-color: #283542;
@@ -301,7 +298,7 @@
   --inline-padding-of-input: 1.2em;
   --gap: 0.9rem;
 }
-/* form style */
+
 .formv {
   font-size: 0.9rem;
   display: flex;
@@ -311,7 +308,7 @@
   position: relative;
   isolation: isolate;
 }
-/* a fancy bg for showing background and border when focus. */
+
 .fancy-bg {
   position: absolute;
   width: 100%;
@@ -323,7 +320,7 @@
   pointer-events: none;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
-/* label styling */
+
 label {
   width: 100%;
   padding: 0.8em;
@@ -336,17 +333,17 @@ label {
 .search,.close-btn {
   position: absolute;
 }
-/* styling search-icon */
+
 .search {
   fill: var(--text-color);
   left: var(--inline-padding-of-input);
 }
-/* svg -- size */
+
 svg {
   width: 17px;
   display: block;
 }
-/* styling of close button */
+
 .close-btn {
   border: none;
   right: var(--inline-padding-of-input);
@@ -363,7 +360,7 @@ svg {
   opacity: 0;
   visibility: hidden;
 }
-/* styling of input */
+
 .inputv {
   color: var(--input-text-color);
   width: 100%;
@@ -379,21 +376,21 @@ svg {
 .inputv::placeholder {
   color: var(--text-color)
 }
-/* input background change in focus */
+
 .inputv:focus ~ .fancy-bg {
   border: 1px solid var(--active-color);
   background: var(--focus-input-bg-color);
 }
-/* search icon color change in focus */
+
 .inputv:focus ~ .search {
   fill: var(--active-color);
 }
-/* showing close button when typing */
+
 .inputv:valid ~ .close-btn {
   opacity: 1;
   visibility: visible;
 }
-/* this is for the default background in input,when selecting autofill options -- you can remove this code if you do not want to override the browser style.  */
+
 .inputv:-webkit-autofill,
 .inputv:-webkit-autofill:hover,
 .inputv:-webkit-autofill:focus,
@@ -451,7 +448,7 @@ svg {
 hr{
   margin: 5px;
 }
-/*Estilo do botão de login*/
+
 .btn-login {
   display: flex;
   justify-content: center;
@@ -576,7 +573,7 @@ hr{
 
 }
 .menu-profile{
-  color: white;/*343458, 434370, 283542*/
+  color: white;
   font-size: 130%;
   font-weight: 500;
   white-space: nowrap;
@@ -789,7 +786,7 @@ hr{
   color: rgba(243, 244, 246, 1);
 }
 .input-group textarea {
-  resize: vertical; /* Permite redimensionar verticalmente */
+  resize: vertical;
 }
 
 .input-group input:focus {

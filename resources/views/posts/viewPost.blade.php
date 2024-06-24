@@ -21,6 +21,7 @@
           <br>
           Gostaríamos de informar que estaremos realizando uma manutenção programada em nossos servidores para <br>melhorias e atualizações essenciais. 
           <br>Durante este período, alguns serviços podem ficar temporariamente indisponíveis.
+          @if(Auth::check())
           <br><br><div class="buttons-container">
                         <button class="circle-buttons edit-buttons">
                             <i class="fa-solid fa-pencil"></i>
@@ -29,6 +30,7 @@
                             <i class="fa-solid fa-trash"></i>
                         </button>
                     </div>
+                    @endif
         </div>
     </div>
 @endsection
