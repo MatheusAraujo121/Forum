@@ -1336,3 +1336,13 @@ tbody tr:hover {
 .green{
   color: green;
 }
+.footer1{
+  background-color: #283542;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer-border {
+  border-top: 1px solid #575757; /* Você pode ajustar a cor e a espessura da borda conforme necessário */
+  padding-top: 10px; /* Espaçamento interno superior para o conteúdo do footer */
+}

@@ -280,6 +280,9 @@
             @yield('content')
           </div>
         </div>
+        <footer class="footer1 footer-border">
+            <p>Gamer's Web &copy; 2024</p>
+        </footer>
       </section>
       <script>
         let arrow = document.querySelectorAll(".arrow");
