@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TagController;
 
 //Authentication routes
 Route::match (['get','post'], '/login', 
@@ -42,13 +43,21 @@ Route::middleware('auth')->group(function(){
         return view('topics.createTopic');
     })->name('newTopic');
 
-    Route::get('/newtag', function () {
-        return view('tags.createTag');
-    })->name('newTag');
+    Route::match(['get', 'post'],'/newtag', 
+        [TagController::class,'createTag']
+    )->name('newTag');
 
-    Route::get('/edittag', function () {
-        return view('tags.editTag');
-    })->name('editTag');
+    Route::get('/edittag/{uid}', 
+        [TagController::class,'editTag']
+    )->name('editTag');
+
+    Route::put('/edittag/{uid}/update', 
+        [TagController::class,'updateTag']
+    )->name('updateTag');
+
+    Route::delete('/edittag/{uid}/delete', 
+        [TagController::class,'deleteTag']
+    )->name('deleteTag');
     
     Route::get('/edittopic', function () {
         return view('topics.editTopic');
@@ -80,9 +89,9 @@ Route::get('/viewtopic', function () {
 })->name('viewTopic');
 
 //Tag routes
-Route::get('/viewtag', function () {
-    return view('tags.viewTag');
-})->name('viewTag');
+Route::get('/viewtag', 
+    [TagController::class, 'viewTag']
+)->name('viewTag');
 
 //Post routes
 Route::get('/viewpost', function () {

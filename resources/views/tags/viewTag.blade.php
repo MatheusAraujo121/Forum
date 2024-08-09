@@ -16,98 +16,34 @@
                 <th>Opções
                 @endif
             </thead>
-            <tbody>
+            <tbody> 
+            @if($tags->isEmpty())
                 <tr>
-                <td>#Jogos
-                <td>Gênero de jogos
-                @if(Auth::check())
-                <td><div class="buttons-container">
-                        <button class="circle-buttons edit-buttons">
-                            <i class="fa-solid fa-pencil"></i>
-                        </button>
-                        <button class="circle-buttons delete-buttons">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
+                    <td colspan="3">Nenhuma tag cadastrada.</td>
+                </tr>
+            @else
+                @foreach ($tags as $tag)
+                    <tr>
+                    <td>{{$tag->tagname}}
+                    <td>{{$tag->tagtype}}
+                    @if(Auth::check())
+                    <td><div class="buttons-container">
+                        <a class="lgn-3" href="{{ route('editTag', [$tag->id]) }}">
+                            <button class="circle-buttons edit-buttons">
+                                <i class="fa-solid fa-pencil"></i>
+                            </button>
+                        </a>
+                            <form action="{{route('deleteTag', [$tag->id])}}" method="POST" class="login-form">
+                                @csrf
+                                @method('delete')
+                                <button class="circle-buttons delete-buttons">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form> 
+                        </div>
                     @endif
-                <tr>
-                <td>#Ação
-                <td>Genêro de jogos
-                @if(Auth::check())
-                <td><div class="buttons-container">
-                        <button class="circle-buttons edit-buttons">
-                            <i class="fa-solid fa-pencil"></i>
-                        </button>
-                        <button class="circle-buttons delete-buttons">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                    @endif
-                <tr>
-                <td>#Genêro
-                <td>Genêro de jogos
-                @if(Auth::check())
-                <td><div class="buttons-container">
-                        <button class="circle-buttons edit-buttons">
-                            <i class="fa-solid fa-pencil"></i>
-                        </button>
-                        <button class="circle-buttons delete-buttons">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                    @endif
-                <tr>
-                <td>#E-sports
-                <td>Gênero de jogos 
-                @if(Auth::check())
-                <td><div class="buttons-container">
-                        <button class="circle-buttons edit-buttons">
-                            <i class="fa-solid fa-pencil"></i>
-                        </button>
-                        <button class="circle-buttons delete-buttons">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                    @endif
-                <tr>
-                <td>#Simulação 
-                <td>Gênero de jogos
-                @if(Auth::check())
-                <td><div class="buttons-container">
-                        <button class="circle-buttons edit-buttons">
-                            <i class="fa-solid fa-pencil"></i>
-                        </button>
-                        <button class="circle-buttons delete-buttons">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                    @endif
-                <tr>
-                <td>#MundoAberto  
-                <td>Gênero de jogos
-                @if(Auth::check())
-                <td><div class="buttons-container">
-                        <button class="circle-buttons edit-buttons">
-                            <i class="fa-solid fa-pencil"></i>
-                        </button>
-                        <button class="circle-buttons delete-buttons">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                    @endif
-                <tr>
-                <td>#Indie 
-                <td>Gênero de jogos
-                @if(Auth::check())
-                <td><div class="buttons-container">
-                        <button class="circle-buttons edit-buttons">
-                            <i class="fa-solid fa-pencil"></i>
-                        </button>
-                        <button class="circle-buttons delete-buttons">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                    @endif
+                @endforeach
+            @endif
             </tbody>
         </table>
 @endsection

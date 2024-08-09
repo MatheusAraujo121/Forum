@@ -6,14 +6,18 @@
 
 @section('content')
 
-      <form class="formd" action="" method="POST">
+      <form class="formd" action="{{ route('updateTag', ['uid' => $tag->id]) }}" method="POST">
+      @csrf
+      @method('put')
         <div class="input-group">
-          <label for="Nomta">Nome da tag</label>
-          <input type="nomta" id="nomta" name="nomta" value="">
+          <label for="tagname">Nome da tag</label>
+          <input type="tagname" id="tagname" name="tagname" value="{{$tag->tagname}}">
+          @error('tagname') <span>{{ $message }}</span> @enderror
         </div>
         <div class="input-group">
-          <label for="Tita">Tipo da tag</label>
-          <input type="tita" id="tita" name="tita" value="">
+          <label for="tagtype">Tipo da tag</label>
+          <input type="tagtype" id="tagtype" name="tagtype" value="{{$tag->tagtype}}">
+          @error('tagtype') <span>{{ $message }}</span> @enderror
         </div>
         <br>
         <button type="submit" class="signs">Atualizar</button>

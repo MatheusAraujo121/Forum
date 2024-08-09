@@ -6,14 +6,17 @@
 
 @section('content')
 
-      <form class="formd" action="" method="POST">
+      <form class="formd" action="{{route('newTag')}}" method="POST">
+      @csrf
         <div class="input-group">
-          <label for="Nomta">Nome da tag</label>
-          <input type="nomta" id="nomta" name="nomta" value="">
+          <label for="tagname">Nome da tag</label>
+          <input type="tagname" id="tagname" name="tagname" value="">
+          @error('tagname') <span>{{ $message }}</span> @enderror
         </div>
         <div class="input-group">
-          <label for="Tita">Tipo da tag</label>
-          <input type="tita" id="tita" name="tita" value="">
+          <label for="tagtype">Tipo da tag</label>
+          <input type="tagtype" id="tagtype" name="tagtype" value="">
+          @error('tagtype') <span>{{ $message }}</span> @enderror
         </div>
         <br>
         <button type="submit" class="signs">Criar</button>

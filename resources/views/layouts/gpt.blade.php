@@ -1,5 +1,6 @@
 <?php 
   use App\Models\User;
+  use App\Models\Tag;
 ?>
 <!DOCTYPE html>
   <html lang="pt-br">
@@ -73,9 +74,9 @@
                   <li>
                     <a href="{{ url('/newtag') }}">Criar nova tag</a>
                   </li>
-                  <li>
-                    <a href="{{ url('/edittag') }}">Editar tag</a>
-                  </li>
+                  <!--<li>
+                        <a href="{{ url('/edittag') }}">Editar tag</a>
+                      </li> -->
                 @endif
                 <li>
                   <a href="{{ url('/viewtag') }}">Visualizar tags</a>
