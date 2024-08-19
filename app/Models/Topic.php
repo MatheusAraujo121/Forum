@@ -14,4 +14,9 @@ class Topic extends Post
         'description',
         'status'
     ];
+
+    public function category()
+    {
+        return $this->hasMany(Category::class);
+    }
 }
