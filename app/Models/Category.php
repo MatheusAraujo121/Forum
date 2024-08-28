@@ -18,9 +18,4 @@ class Category extends Model
     {
         return $this->hasMany(Topic::class);
     }
-
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class);
-    }
 }
