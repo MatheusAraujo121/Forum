@@ -71,6 +71,23 @@ Route::middleware('auth')->group(function(){
         return view('posts.editPost');
     })->name('editPost');
 
+    Route::match (['get', 'post'],'/CreateCategory', 
+        [CategoryController::class,'createCategory']
+    )->name('categoryCreate');
+
+    Route::get('/users/{uid}', 
+        [CategoryController::class,'listUserByIDS']
+    )->name('routeListUserByID');
+
+    Route::put('/Category/{uid}/update', 
+        [CategoryController::class,'updateCategory']
+    )->name('UpdateCategory');
+
+    Route::delete('/Category/{uid}/delete', 
+        [CategoryController::class,'deleteCategory']
+    )->name('DeleteCategory');
+    
+
     //Complaint routes
     Route::get('/report', 
     [UserController::class,'listUsersComplaint']
