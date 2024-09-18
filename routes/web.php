@@ -75,8 +75,8 @@ Route::middleware('auth')->group(function(){
         [CategoryController::class,'createCategory']
     )->name('categoryCreate');
 
-    Route::get('/users/{uid}', 
-        [CategoryController::class,'listUserByIDS']
+    Route::get('/Category/{uid}', 
+        [CategoryController::class,'listCategory']
     )->name('routeListUserByID');
 
     Route::put('/Category/{uid}/update', 
