@@ -88,22 +88,22 @@
                 <div class="iocn-link">
                   <a href="#">
                     <i class='bx bxs-book-alt' ></i>
-                    <span class="link_name">Postagens</span>
+                    <span class="link_name">Categorias</span>
                   </a>
                   <i class='bx bxs-chevron-down arrow' ></i>
                 </div>
                 <ul class="sub-menu">
                   <li>
-                    <a class="link_name" href="#">Postagens</a>
+                    <a class="link_name" href="#">Categorias</a>
                   </li>
                   <li>
-                    <a href="{{ url('/newpost') }}">Criar nova postagem</a>
+                    <a href="{{ url('/CreateCategory') }}">Criar nova categoria</a>
                   </li>
-                  <li>
+                  <!--<li>
                     <a href="{{ url('/editpost') }}">Editar postagem</a>
-                  </li>
+                  </li>-->
                   <li>
-                    <a href="{{ url('/viewpost') }}">ver minhas postagens</a>
+                    <a href="{{ url('/Categories') }}">Lista de categorias</a>
                   </li>
                 </ul>
               </li>

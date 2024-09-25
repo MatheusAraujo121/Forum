@@ -13,6 +13,7 @@
                 <th>ID
                 <th>Título
                 <th>Descrição
+                <th>Opções
             </thead>
             <tbody>
             @foreach ($categories as $category)
@@ -20,6 +21,23 @@
                 <td>{{$category->id}}
                 <td>{{$category->title}}
                 <td>{{$category->description}}
+                <td>
+                    <div class="opc">
+                        <a class="lgn-3" href="{{ route('ViewCategory', [$category->id]) }}">
+                            <button class="buttonsd tooltip">
+                                <i class="fa-solid fa-pencil"></i>
+                                <span class="tooltiptext">Visualizar Categoria</span>
+                            </button>
+                        </a>
+                        <form action="{{route('DeleteCategory', [$category->id])}}" method="POST" class="login-form">
+                            @csrf
+                            @method('delete')
+                            <button class="buttonsd tooltip">
+                                <i class="fa-solid fa-ban"></i>
+                                <span class="tooltiptext">Excluir</span>
+                            </button>
+                        </form>    
+                    </div>
                 @endforeach
             </tbody>
         </table>

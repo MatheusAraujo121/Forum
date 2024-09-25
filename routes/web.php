@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\CategoryController;
 
 //Authentication routes
 Route::match (['get','post'], '/login', 
@@ -75,9 +76,17 @@ Route::middleware('auth')->group(function(){
         [CategoryController::class,'createCategory']
     )->name('categoryCreate');
 
+    Route::get('/edit/category/{uid}', 
+        [CategoryController::class,'editCategory']
+    )->name('EditCategory');
+
     Route::get('/Category/{uid}', 
-        [CategoryController::class,'listCategory']
-    )->name('routeListUserByID');
+        [CategoryController::class,'viewCategory']
+    )->name('ViewCategory');
+
+    Route::get('/Categories', 
+        [CategoryController::class,'listCategories']
+    )->name('listCategories');
 
     Route::put('/Category/{uid}/update', 
         [CategoryController::class,'updateCategory']
