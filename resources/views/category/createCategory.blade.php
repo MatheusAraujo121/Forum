@@ -9,12 +9,12 @@
       @csrf
         <div class="input-group">
           <label for="title">Título da categoria</label>
-          <input type="title" id="title" name="title" value="{{old('title')}}" required>
+          <input type="text" id="title" name="title" value="{{old('title')}}" required>
           @error('tittle') <span>{{ $message }}</span> @enderror
         </div>
         <div class="input-group">
           <label for="description">Assunto</label>
-          <input type="description" id="description" name="description" value="{{old('description')}}" required>
+          <input type="text" id="description" name="description" value="{{old('description')}}" required>
           @error('description') <span>{{ $message }}</span> @enderror
         </div>
         <br>

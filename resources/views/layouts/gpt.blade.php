@@ -79,7 +79,7 @@
                       </li> -->
                 @endif
                 <li>
-                  <a href="{{ url('/viewtag') }}">Visualizar tags</a>
+                  <a href="{{ url('/Tags') }}">Visualizar tags</a>
                 </li>
               </ul>
             </li>
@@ -97,7 +97,7 @@
                     <a class="link_name" href="#">Categorias</a>
                   </li>
                   <li>
-                    <a href="{{ url('/CreateCategory') }}">Criar nova categoria</a>
+                    <a href="{{ url('/Categories/CreateCategory') }}">Criar nova categoria</a>
                   </li>
                   <!--<li>
                     <a href="{{ url('/editpost') }}">Editar postagem</a>

@@ -5,21 +5,18 @@
 @section('FormTitle', 'Editar tag')
 
 @section('content')
-
-      <form class="formd" action="{{ route('updateTag', ['uid' => $tag->id]) }}" method="POST">
+<span>{{ session('message') }}</span>
+    @if($tag != null)
+      <form class="formd" action="{{ route('UpdateTag', [$tag->id]) }}" method="POST">
       @csrf
       @method('put')
         <div class="input-group">
-          <label for="tagname">Nome da tag</label>
-          <input type="tagname" id="tagname" name="tagname" value="{{$tag->tagname}}">
-          @error('tagname') <span>{{ $message }}</span> @enderror
-        </div>
-        <div class="input-group">
-          <label for="tagtype">Tipo da tag</label>
-          <input type="tagtype" id="tagtype" name="tagtype" value="{{$tag->tagtype}}">
-          @error('tagtype') <span>{{ $message }}</span> @enderror
+          <label for="title">Título da tag</label>
+          <input type="title" id="title" name="title" value="{{$tag->title}}">
+          @error('title') <span>{{ $message }}</span> @enderror
         </div>
         <br>
         <button type="submit" class="signs">Atualizar</button>
       </form> 
+    @endif
 @endsection

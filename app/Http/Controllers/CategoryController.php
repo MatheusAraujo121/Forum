@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function listCategories(Request $request){
         $categories = Category::all();
-        return view('category.listCategories', ['categories' => $categories]);
+        return view('category.listCategories', compact('categories')); // compact('categories') faz o mesmo que ['category' => $category]
     }
 
     public function editCategory(Request $request, $uid){
@@ -18,8 +18,8 @@ class CategoryController extends Controller
         return view('category.editCategory', ['category' => $category]);
     }
 
-    public function viewCategory(Request $request, $uid){ 
-        $category = Category::where('id', $uid)->first();
+    public function viewCategory(Request $request, $uid){
+        $category = Category::where('id', $uid)->first(); //findOrFai($id)
         return view('category.viewCategory', ['category' => $category]);
     }
 
@@ -28,21 +28,28 @@ class CategoryController extends Controller
 
             return view('category.createCategory');
         }else{
-            $category = Category::create([
-                'title' => $request->title,
-                'description' => $request->description,
+
+            $validated = $request->validate([
+                'title'=> 'required|string',
+                'description'=> 'required|string'
             ]);
+
+            $category = Category::create($validated);
 
             return redirect()->route('listCategories');
         }
     }
 
     public function updateCategory(Request $request, $uid){
-        //procurar o usuário no banco 
+        //procurar o usuário no banco
             $category = Category::where('id', $uid)->first();
             $category->title = $request->title;
             $category->description = $request->description;
 
+            $request->validate([
+                'title'=> 'string',
+                'description'=> 'string'
+            ]);
             $category->save();
             return redirect()->route('ViewCategory', [$category -> id])
                     ->with('message', 'Atualizado com sucesso!');
