@@ -15,6 +15,10 @@ class Topic extends Post
         'status'
     ];
 
+    public function post(){
+        return $this->belongsTo(Post::class);
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
