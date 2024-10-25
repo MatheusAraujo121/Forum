@@ -7,142 +7,112 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\CategoryController;
 
 //Authentication routes
-Route::match (['get','post'], '/login',
-    [AuthController::class,'loginUser']
-)->name('login');
+Route::match(['get', 'post'], '/login', [AuthController::class, 'loginUser'])->name('login');
 
-Route::get('/logout',
-    [AuthController::class,'logoutUser']
-)->name('logout');
+Route::match(['get', 'post'], '/register', [UserController::class, 'registerUser'])->name('register');
 
-Route::match (['get', 'post'],'/register',
-    [UserController::class,'registerUser']
-)->name('register');
+Route::get('/logout', [AuthController::class, 'logoutUser'])->name('logout');
 
-Route::group(['prefix' => 'Categories'], function(){
-    Route::match (['get', 'post'],'/CreateCategory',
-        [CategoryController::class,'createCategory']
-    )->name('categoryCreate');
+//Category routes
+Route::group(['prefix' => 'categories', 'middleware' => ['auth']], function () {
 
-    Route::get('/edit/{uid}',
-        [CategoryController::class,'editCategory']
-    )->name('EditCategory');
+    Route::match(['get', 'post'], '/create', [CategoryController::class, 'createCategory'])->name('categoryCreate');
 
-    Route::put('/{uid}/update',
-        [CategoryController::class,'updateCategory']
-    )->name('UpdateCategory');
+    Route::get('/edit/{uid}', [CategoryController::class, 'editCategory'])->name('EditCategory');
 
-    Route::delete('/{uid}/delete',
-        [CategoryController::class,'deleteCategory']
-    )->name('DeleteCategory');
+    Route::put('/{uid}/update', [CategoryController::class, 'updateCategory'])->name('UpdateCategory');
+
+    Route::delete('/{uid}/delete', [CategoryController::class, 'deleteCategory'])->name('DeleteCategory');
 });
 
-Route::group(['prefix' => 'Categories'], function(){
-    Route::get('/{uid}',
-            [CategoryController::class,'viewCategory']
-        )->name('ViewCategory');
+Route::group(['prefix' => 'Categories'], function () {
 
-        Route::get('/',
-            [CategoryController::class,'listCategories']
-        )->name('listCategories');
+    Route::get('/{uid}', [CategoryController::class, 'viewCategory'])->name('ViewCategory');
+
+    Route::get('/', [CategoryController::class, 'listCategories'])->name('listCategories');
 });
-Route::middleware('auth')->group(function(){
-    Route::get('/users',
-        [UserController::class,'listAllUsers']
-    )->name('routeListAllUsers');
-
-    Route::get('/users/{uid}/profile',
-        [UserController::class,'listUserByID']
-    )->name('routeListUserByIDS');
-
-    Route::get('/users/{uid}',
-        [UserController::class,'listUserByIDS']
-    )->name('routeListUserByID');
-
-    Route::put('/users/{uid}/update',
-        [UserController::class,'updateUser']
-    )->name('UpdateUser');
-
-    Route::delete('/users/{uid}/delete',
-        [UserController::class,'deleteUser']
-    )->name('DeleteUser');
-
-    Route::get('/newtopic', function () {
-        return view('topics.createTopic');
-    })->name('newTopic');
-
-    Route::get('/edit/tag/{uid}',
-        [TagController::class,'editTag']
-    )->name('EditTag');
-
-    Route::get('/Tags',
-        [TagController::class,'listTags']
-    )->name('listTags');
-
-    Route::match(['get', 'post'],'/newtag',
-        [TagController::class,'createTag']
-    )->name('newTag');
-
-    Route::get('/edittag/{uid}',
-        [TagController::class,'viewTag']
-    )->name('ViewTag');
-
-    Route::put('/edittag/{uid}/update',
-        [TagController::class,'updateTag']
-    )->name('UpdateTag');
-
-    Route::delete('/edittag/{uid}/delete',
-        [TagController::class,'deleteTag']
-    )->name('DeleteTag');
 
 
+//User routes
+Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
 
-    Route::get('/edittopic', function () {
-        return view('topics.editTopic');
-    })->name('editTopic');
+    Route::get('/', [UserController::class, 'listAllUsers'])->name('routeListAllUsers');
 
-    Route::get('/newpost', function () {
-        return view('posts.createPost');
-    })->name('newPost');
+    Route::get('/{uid}/profile', [UserController::class, 'listUserByID'])->name('routeListUserByIDS');
 
-    Route::get('/editpost', function () {
-        return view('posts.editPost');
-    })->name('editPost');
+    Route::get('/{uid}', [UserController::class, 'listUserByIDS'])->name('routeListUserByID');
 
+    Route::put('/{uid}/update', [UserController::class, 'updateUser'])->name('UpdateUser');
 
+    Route::delete('/{uid}/delete', [UserController::class, 'deleteUser'])->name('DeleteUser');
 
-
-    //Complaint routes
-    Route::get('/report',
-    [UserController::class,'listUsersComplaint']
-    )->name('newReport');
-
-    //User routes
     Route::get('/delconf', function () {
         return view('users.confDel');
     })->name('confDel');
 });
 
-//Tópic routes
+//Topic routes
+Route::group(['prefix' => 'topic', 'middleware' => ['auth']], function () {
 
-Route::get('/viewtopic', function () {
-    return view('topics.viewTopic');
-})->name('viewTopic');
+    Route::get('/create', function () {
+        return view('topics.createTopic');
+    })->name('newTopic');
 
-//Tag routes
-Route::get('/viewtag',
-    [TagController::class, 'viewTag']
-)->name('viewTag');
+    Route::get('/edit', function () {
+        return view('topics.editTopic');
+    })->name('editTopic');
+});
 
-//Post routes
-Route::get('/viewpost', function () {
-    return view('posts.viewPost');
-})->name('viewPost');
+Route::group(['prefix' => 'topic'], function () {
+    Route::get('/', function () {
+        return view('topics.viewTopic');
+    })->name('viewTopic');
+});
+
+//Tags routes
+Route::group(['prefix' => 'tag', 'middleware' => ['auth']], function () {
+
+    Route::get('/edit/{uid}', [TagController::class, 'editTag'])->name('EditTag');
+
+    Route::match(['get', 'post'], '/create', [TagController::class, 'createTag'])->name('newTag');
+
+    Route::put('/edit/{uid}/update', [TagController::class, 'updateTag'])->name('UpdateTag');
+
+    Route::delete('/delete/{uid}', [TagController::class, 'deleteTag'])->name('DeleteTag');
+});
+
+Route::group(['prefix' => 'tags'], function () {
+
+    Route::get('/', [TagController::class, 'listTags'])->name('listTags');
+
+    Route::get('/{uid}', [TagController::class, 'viewTag'])->name('ViewTag');
+});
+
+//Posts routes
+Route::group(['prefix' => 'post', 'middleware' => ['auth']], function () {
+
+    Route::get('/create', function () {
+        return view('posts.createPost');
+    })->name('newPost');
+
+    Route::get('/edit', function () {
+        return view('posts.editPost');
+    })->name('editPost');
+});
+
+Route::group(['prefix' => 'post'], function () {
+    Route::get('/', function () {
+        return view('posts.viewPost');
+    })->name('viewPost');
+});
+
+//Report routes
+Route::group(['prefix' => 'report', 'middleware' => ['auth']], function () {
+    Route::get('/', [UserController::class, 'listUsersComplaint'])->name('newReport');
+});
+
 
 //Welcome route
 Route::get('/', function () {
     return view('welcome');
 })->name('FirstPage');
-
-//Route::get('/users/ID/edit', [UserController::class,'updateUser'])->name('routeUpdateUser');
-//Route::get('/users/ID/delete', [UserController::class,'deleteUser'])->name('routeDeleteUser');

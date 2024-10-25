@@ -34,14 +34,14 @@
                 </li>
                 @if(Auth::check())
                   <li>
-                    <a href="{{ url('/newtopic') }}">Criar novo tópico</a>
+                    <a href="{{ route('newTopic') }}">Criar novo tópico</a>
                   </li>
                   <li>
-                    <a href="{{ url('/edittopic') }}">Editar tópico</a>
+                    <a href="{{ route('editTopic') }}">Editar tópico</a>
                   </li>
                 @endif
                 <li>
-                  <a href="{{ url('/viewtopic') }}">Visualizar tópicos</a>
+                  <a href="{{ route('viewTopic') }}">Visualizar tópicos</a>
                 </li>
               </ul>
             </li>
@@ -72,14 +72,14 @@
                 </li>
                 @if(Auth::check())
                   <li>
-                    <a href="{{ url('/newtag') }}">Criar nova tag</a>
+                    <a href="{{ route('newTag') }}">Criar nova tag</a>
                   </li>
-                  <!--<li>
+                  <!-- <li>
                         <a href="{{ url('/edittag') }}">Editar tag</a>
                       </li> -->
                 @endif
                 <li>
-                  <a href="{{ url('/Tags') }}">Visualizar tags</a>
+                  <a href="{{ route('listTags') }}">Visualizar tags</a>
                 </li>
               </ul>
             </li>
@@ -97,13 +97,13 @@
                     <a class="link_name" href="#">Categorias</a>
                   </li>
                   <li>
-                    <a href="{{ url('/Categories/CreateCategory') }}">Criar nova categoria</a>
+                    <a href="{{ route('categoryCreate') }}">Criar nova categoria</a>
                   </li>
                   <!--<li>
                     <a href="{{ url('/editpost') }}">Editar postagem</a>
                   </li>-->
                   <li>
-                    <a href="{{ url('/Categories') }}">Lista de categorias</a>
+                    <a href="{{ route('listCategories') }}">Lista de categorias</a>
                   </li>
                 </ul>
               </li>
@@ -123,7 +123,7 @@
               @if(Auth::user()->id == 1)
               <li>
                 <div class="iocn-link">
-                  <a href="{{ url('/users') }}">
+                  <a href="{{ route('routeListAllUsers') }}">
                     <!--<i class='bx bx-plug' ></i>-->
                     <i class="fa-solid fa-users"></i>
                     <span class="link_name">Usuários</span>
@@ -159,7 +159,7 @@
             @if(Auth::check())
               @if(Auth::user()->id == 1)
                 <li>
-                  <a href="{{ url('/report') }}">
+                  <a href="{{ route('newReport') }}">
                     <i class="fa-solid fa-triangle-exclamation"></i>
                     <span class="link_name">Denúncias</span>
                   </a>
@@ -197,7 +197,7 @@
                 <div class="name-job">
                   <div class="profile_name">{{ Auth::user()->name }}</div>
                 </div>
-                <a href="{{ url('/logout') }}">
+                <a href="{{ route('logout') }}">
                   <button class="Btn">
                     <div class="sign">
                       <svg viewBox="0 0 512 512">
@@ -212,7 +212,7 @@
               </div>
             @endif
             @if(Auth::guest())
-            <a class="lgn"href="{{ url('/login') }}">
+            <a class="lgn"href="{{ route('login') }}">
               <div class="btn-login">
                 Faça login
               </div>
@@ -223,7 +223,7 @@
       </div>
       <section class="home-section">
         <div class="navbar">
-          <a href="{{ url('/') }}">
+          <a href="{{ route('FirstPage') }}">
             <div class="logo-details">
               <img class="logo-img" src="{{ asset('img/logo.png') }}" />
             </div>
@@ -267,7 +267,7 @@
           </div>
           @endif
           @if(Auth::guest())
-            <a class="lgn-2" href="{{ url('/register') }}">
+            <a class="lgn-2" href="{{ route('register') }}">
               <div class="btn-register">
                 Faça cadastro
               </div>

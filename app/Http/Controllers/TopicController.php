@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Topic;
+use App\Models\Category;
 
 class TopicController extends Controller
 {
@@ -16,8 +17,8 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        return $posts;
+        $topics = Topic::all();
+        return $topics;
     }
 
     /**
@@ -27,7 +28,8 @@ class TopicController extends Controller
      */
     public function create()
     {
-        //
+        $topics = Category::all();
+        return view('topic.create', ['topics' => $topics]);
     }
 
     /**
@@ -38,7 +40,29 @@ class TopicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'image' => 'required|string',
+            'status' => 'required|int',
+            'category' => 'required'
+        ]);
+
+        $topic = new Topic([
+            'title' => $request->title,
+            'description' => $request->description,
+            'status' => $request->status,
+            'category_id' => $request->category
+        ]);
+
+        // $post = new Post([
+        //     'image' => $request->image
+        // ]);
+
+        // $topic->post()->save($post);
+
+        return($topic);
+        
     }
 
     /**
