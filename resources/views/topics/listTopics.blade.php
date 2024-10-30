@@ -12,22 +12,29 @@
                 <tr>
                 <th>ID
                 <th>Título
-                <th>Opções
+                <th>Descrição
+                <th>Imagem
+                <th>Status
+                <th>Categoria
             </thead>
             <tbody>
-            @foreach ($tags as $tag)
+            @foreach ($topics as $topic)
                 <tr>
-                <td>{{$tag->id}}
-                <td>{{$tag->title}}
+                <td>{{$topic->id}}
+                <td>{{$topic->title}}
+                <td>{{$topic->description}}
+                <td>{{$topic->image}}
+                <td>{{$topic->status}}
+                <td>{{$topic->category}}
                 <td>
                     <div class="opc">
-                        <a class="lgn-3" href="{{ route('ViewTag', [$tag->id]) }}">
+                        <a class="lgn-3" href="{{ route('ViewTag', [$topic->id]) }}">
                             <button class="buttonsd tooltip">
                                 <i class="fa-solid fa-pencil"></i>
-                                <span class="tooltiptext">Visualizar tag</span>
+                                <span class="tooltiptext">Visualizar Topico</span>
                             </button>
                         </a>
-                        <form action="{{route('DeleteTag', [$tag->id])}}" method="POST" class="login-form">
+                        <form action="{{route('DeleteTag', [$topic->id])}}" method="POST" class="login-form">
                             @csrf
                             @method('delete')
                             <button class="buttonsd tooltip">

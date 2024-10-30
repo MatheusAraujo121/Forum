@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TopicController;
 
 //Authentication routes
 Route::match(['get', 'post'], '/login', [AuthController::class, 'loginUser'])->name('login');
@@ -54,19 +55,17 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
 //Topic routes
 Route::group(['prefix' => 'topic', 'middleware' => ['auth']], function () {
 
-    Route::get('/create', function () {
-        return view('topics.createTopic');
-    })->name('newTopic');
+    Route::get('/', [TopicController::class, 'index'])->name('viewTopic');
+    Route::get('/create', [TopicController::class, 'create'])->name('newTopic');
+    Route::post('/create', [TopicController::class, 'store'])->name('createTopic');
+    Route::get('/{id}/edit', [TopicController::class, 'edit'])->name('editTopic');
+    Route::put('/{id}/edit', [TopicController::class, 'update'])->name('updateTopic');
+    Route::delete('/{id}/destroy', [TopicController::class, 'destroy'])->name('deleteTopic');
+
 
     Route::get('/edit', function () {
         return view('topics.editTopic');
     })->name('editTopic');
-});
-
-Route::group(['prefix' => 'topic'], function () {
-    Route::get('/', function () {
-        return view('topics.viewTopic');
-    })->name('viewTopic');
 });
 
 //Tags routes

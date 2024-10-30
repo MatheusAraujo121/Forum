@@ -6,20 +6,37 @@
 
 @section('content')
 
-      <form class="formd" action="" method="POST">
-        <div class="input-group">
-          <label for="Tito">Título do tópico</label>
-          <input type="tito" id="tito" name="tito" value="">
-        </div>
-        <div class="input-group">
-          <label for="Assunto">Assunto</label>
-          <input type="assunto" id="assunto" name="assunto" value="">
-        </div>
-        <div class="input-group">
-          <label for="Tags">Tags</label>
-          <input type="tags" id="tags" name="tags" value="">
-        </div>
-        <br>
-        <button type="submit" class="signs">Criar</button>
-      </form> 
+<form class="formd" action="{{ route('createTopic') }}" method="POST">
+  @csrf
+  <div class="input-group">
+    <label for="title">Título do tópico</label>
+    <input type="text" id="title" name="title" value="">
+    @error('title') <span>{{ $message }}</span> <br /> @enderror
+  </div>
+  <div class="input-group">
+    <label for="description" class="form-label">Descrição</label>
+    <input type="text" name="description" id="description" />
+    @error('description') <span>{{ $message }}</span> <br /> @enderror
+  </div>
+  <div class="input-group">
+    <label for="status" class="form-label">Status</label>
+    <input type="text" name="status" id="status" class="form-control" />
+    @error('status') <span>{{ $message }}</span> <br /> @enderror
+  </div>
+  <div class="input-group">
+    <label for="image" class="form-label">Imagem</label>
+    <input type="text" name="image" id="image" class="form-control" />
+    @error('image') <span>{{ $message }}</span> <br /> @enderror
+  </div>
+  <div class="input-group">
+    <label for="category" class="form-label">Categoria</label>
+    <select name="category" id="category" class="form-control">
+      @foreach ($categories as $category)
+      <option value="{{ $category->id }}">{{ $category->title }}</option>
+    @endforeach
+    </select>
+  </div>
+  <br>
+  <button type="submit" class="signs">Criar</button>
+</form>
 @endsection
