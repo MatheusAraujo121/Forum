@@ -47,9 +47,9 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
 
     Route::delete('/{uid}/delete', [UserController::class, 'deleteUser'])->name('DeleteUser');
 
-    Route::get('/delconf', function () {
+    Route::get('/delete_confirm', function () {
         return view('users.confDel');
-    })->name('confDel');
+    })->name('deleteConfirm');
 });
 
 //Topic routes
@@ -63,9 +63,7 @@ Route::group(['prefix' => 'topic', 'middleware' => ['auth']], function () {
     Route::delete('/{id}/destroy', [TopicController::class, 'destroy'])->name('deleteTopic');
 
 
-    Route::get('/edit', function () {
-        return view('topics.editTopic');
-    })->name('editTopic');
+ 
 });
 
 //Tags routes

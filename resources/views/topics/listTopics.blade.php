@@ -1,11 +1,11 @@
 @extends('layouts.gpt')
 
-@section('title', 'Tags')
+@section('title', 'Tópicos')
 
-@section('header', 'Listar todas as tags')
+@section('header', 'Listar todos os tópicos')
 
 @section('content')
-<h1 class="welcome-text centered">Lista de tags</h1>
+<h1 class="welcome-text centered">Lista de tópicos</h1>
 <br><br><br><br>
         <table>
             <thead>
@@ -25,10 +25,10 @@
                 <td>{{$topic->description}}
                 <td>{{$topic->image}}
                 <td>{{$topic->status}}
-                <td>{{$topic->category}}
+                <td>{{$topic->category_id}}
                 <td>
                     <div class="opc">
-                        <a class="lgn-3" href="{{ route('ViewTag', [$topic->id]) }}">
+                        <a class="lgn-3" href="{{ route('editTopic', [$topic->id]) }}">
                             <button class="buttonsd tooltip">
                                 <i class="fa-solid fa-pencil"></i>
                                 <span class="tooltiptext">Visualizar Topico</span>

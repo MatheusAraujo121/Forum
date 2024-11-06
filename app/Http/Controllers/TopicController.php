@@ -14,7 +14,7 @@ class TopicController extends Controller
     public function index()
     {
         $topics = Topic::with('post')->get();
-        return $topics;
+        return view('topics.listTopics', compact('topics'));
     }
 
     /**
@@ -75,7 +75,7 @@ class TopicController extends Controller
 
 
 
-        return($topic);
+        return redirect()->route('viewTopic');
         
     }
 

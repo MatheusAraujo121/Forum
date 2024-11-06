@@ -36,9 +36,6 @@
                   <li>
                     <a href="{{ route('newTopic') }}">Criar novo tópico</a>
                   </li>
-                  <li>
-                    <a href="{{ route('editTopic') }}">Editar tópico</a>
-                  </li>
                 @endif
                 <li>
                   <a href="{{ route('viewTopic') }}">Visualizar tópicos</a>
