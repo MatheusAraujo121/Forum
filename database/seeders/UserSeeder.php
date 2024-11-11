@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
             'name' => 'Moderador',
             'email' => 'moderador@gmail.com',
             'password' => Hash::make('12345678'),
+            'photo' => 'uploads/shrek.jpeg',
         ]);
     }
 }

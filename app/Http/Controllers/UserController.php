@@ -64,16 +64,24 @@ class UserController extends Controller
             return view('users.register');
         }else{
 
+            $file_name = rand(0, 999999) . '-' . $request->file('photo')->getClientOriginalName();
+            $path = $request->file('photo')->storeAs('uploads', $file_name);
+
             $request->validate([
                 'name'=> 'required|string|max:255',
                 'email'=> 'required|string|email|max:255|unique:users',
-                'password'=> 'required|string|min:8|confirmed'
+                'password'=> 'required|string|min:8|confirmed',
+
             ]);
+
+            $data = $request->all();
+            $data['photo'] = $path;
 
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'photo' => $path,
             ]);
 
             Auth::login($user);

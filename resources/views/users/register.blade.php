@@ -5,7 +5,7 @@
 @section('FormTitle', 'Cadastre-se')
 
 @section('content')
-<form class="formd" action="{{route('register')}}" method="POST">
+<form class="formd" action="{{route('register')}}" method="POST" enctype="multipart/form-data">
   @csrf
   <div class="input-group">
     <label for="name">Nome</label>
@@ -29,6 +29,7 @@
       <a rel="noopener noreferrer" href="#"></a>
     </div>
   </div>
+  <input type="file" name="photo">
   <button type="submit" value="Registrar" class="signs">Cadastrar</button>
 </form>
 <br>
