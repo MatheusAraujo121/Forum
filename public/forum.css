@@ -29,32 +29,7 @@
 .sidebar.close{
   width: 78px;
 }
-.sidebar .logo-details{
-  height: 60px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-.sidebar .logo-details i{
-  font-size: 30px;
-  color: #fff;
-  height: 50px;
-  min-width: 78px;
-  text-align: center;
-  line-height: 50px;
-}
-.sidebar .logo-details .logo_name{
-  font-size: 22px;
-  color: #fff;
-  font-weight: 600;
-  transition: 0.3s ease;
-  transition-delay: 0.1s;
-}
-.sidebar.close .logo-details .logo_name{
-  transition-delay: 0s;
-  opacity: 0;
-  pointer-events: none;
-}
+
 .sidebar .nav-links{
   height: 100%;
   padding: 30px 0 150px 0;
@@ -226,47 +201,14 @@
 .sidebar .profile-details .job{
   font-size: 12px;
 }
-.home-section{
-  position: relative;
-  background: #E4E9F7;
-  height: 100vh;
-  left: 260px;
-  width: calc(100% - 260px);
-  transition: all 0.5s ease;
-}
-.sidebar.close ~ .home-section{
-  left: 78px;
-  width: calc(100% - 78px);
-}
-.home-section .home-content{
-  height: 60px;
-  display: flex;
-  align-items: center;
-}
-.home-section .home-content .bx-menu,
-.home-section .home-content .text{
-  color: #fefefe;
-  font-size: 35px;
-}
-.home-section .home-content .bx-menu{
-  margin: 0 15px;
-  cursor: pointer;
-}
-.home-section .home-content .text{
-  font-size: 26px;
-  font-weight: 600;
-}
-@media (max-width: 420px) {
-  .sidebar.close .nav-links li .sub-menu{
-    display: none;
-  }
-}
+
 .menu{
   color:white;
 }
 
 .navbar {
   background-color: #11101d;
+  width: 100%;
   padding: 0.3%;
   display: flex;
 }
@@ -300,6 +242,7 @@
 }
 
 .formv {
+  margin-left: 15%;
   font-size: 0.9rem;
   display: flex;
   gap: 0.5rem;
@@ -536,6 +479,7 @@ hr{
   transition: box-shadow 0.2s ease-in;
 }
 .logo-img{
+  margin-left: 70%;
   margin-top: 3%;
   max-width: 100%; 
   max-height: 78px; 
@@ -1343,6 +1287,176 @@ tbody tr:hover {
   align-items: center;
 }
 .footer-border {
-  border-top: 1px solid #575757; /* Você pode ajustar a cor e a espessura da borda conforme necessário */
-  padding-top: 10px; /* Espaçamento interno superior para o conteúdo do footer */
+  border-top: 1px solid #575757;
+  padding-top: 10px; 
+}
+
+.menu-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-group .btn {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.arrow {
+  color: #ffffff; 
+  transition: transform 0.3s;
+}
+
+.user-picture {
+  margin-right: 10px;
+  overflow: hidden;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.profile-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.menu-profile .dropdown-menu {
+  margin-top: 0.5rem;
+}
+
+.dropdown-menu {
+  position: absolute;
+  z-index: 1000;
+  display: none;
+  left: 0;
+  right: auto;
+}
+
+
+.user-profile {
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+  height: 200px;          
+  width: 200px;            
+  margin: 0 auto;         
+  border-radius: 50%;      
+  overflow: hidden;       
+}
+
+.user-profile img {
+  width: 100%;             
+  height: 100%;           
+  object-fit: cover;       
+}
+
+.DropOPC {
+  background-color: #33334d; /* Fundo escuro */
+  color: #ffffff;            /* Letras brancas */
+  padding: 10px;
+  border-radius: 5px;
+  list-style: none;
+  margin: 0;
+  border: none;              /* Remove qualquer borda padrão */
+}
+
+.DropOPC li {
+  padding: 8px 12px;
+  cursor: pointer;
+  color: #ffffff;            /* Letras brancas nos itens */
+  background-color: transparent; /* Remove qualquer fundo padrão dos itens */
+  border: none;
+}
+
+.DropOPC li:hover {
+  background-color: rgb(61, 58, 95); /* Cor de fundo ao passar o mouse */
+  color: #ffffff;            /* Garantia de letras brancas ao passar o mouse */
+}
+
+/* Estilo geral para o menu dropdown */
+.dropdown-menu {
+  background-color: #33334d !important; /* Fundo escuro */
+  color: #ffffff !important;            /* Texto branco */
+  border: none;                         /* Remove borda se houver */
+}
+
+/* Estilo para cada item de dropdown */
+.dropdown-menu .dropdown-item {
+  color: #ffffff !important;            /* Garante texto branco nos itens */
+  background-color: transparent !important; /* Remove fundo padrão dos itens */
+}
+
+/* Efeito ao passar o mouse sobre cada item */
+.dropdown-menu .dropdown-item:hover {
+  background-color: rgb(61, 58, 95) !important; /* Fundo mais escuro ao passar o mouse */
+  color: #ffffff !important;            /* Texto branco ao passar o mouse */
+}
+
+.btn-logout {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgb(207, 0, 0);
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+}
+
+.btn-logout:hover {
+  width: 150px;
+  border-radius: 50px;
+  transition-duration: 0.3s;
+  background-color: rgb(255, 69, 69);
+  align-items: center;
+}
+
+.btn-logout:hover .logout-icon {
+  width: 20px;
+  transition-duration: 0.3s;
+  transform: translateY(60%);
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -o-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+
+.btn-logout::before {
+  display: none;
+  content: "Logout";
+  color: white;
+  transition-duration: 0.3s;
+  font-size: 2px;
+  text-decoration: none;
+  margin-left: 20%;
+}
+
+.btn-logout:hover::before {
+  display: block;
+  padding-right: 10px;
+  font-size: 13px;
+  opacity: 1;
+  transform: translateY(0px);
+  transition-duration: 0.3s;
 }

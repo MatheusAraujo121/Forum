@@ -47,10 +47,11 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
 
     Route::delete('/{uid}/delete', [UserController::class, 'deleteUser'])->name('DeleteUser');
 
-    Route::get('/delete_confirm', function () {
-        return view('users.confDel');
-    })->name('deleteConfirm');
 });
+
+Route::middleware('auth')->get('/delete_confirm', function () {
+    return view('users.confDel');
+})->name('deleteConfirm');
 
 //Topic routes
 Route::group(['prefix' => 'topic', 'middleware' => ['auth']], function () {

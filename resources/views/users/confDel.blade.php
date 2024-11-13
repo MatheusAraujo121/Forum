@@ -1,4 +1,3 @@
-
 @extends('layouts.liop')
 
 @section('title', 'Confirmar exclusão')
