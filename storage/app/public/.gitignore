@@ -1,5 +1,6 @@
 *
 !.gitignore
 !storage/
-!storage/public/
-!storage/public/uploads/
+!storage/app/
+!storage/app/public/
+!storage/app/public/uploads/
