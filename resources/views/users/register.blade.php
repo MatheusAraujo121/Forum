@@ -30,6 +30,7 @@
     </div>
   </div>
   <input type="file" name="photo">
+  @error('photo') <span>{{ $message }}</span> @enderror
   <button type="submit" value="Registrar" class="signs">Cadastrar</button>
 </form>
 <br>

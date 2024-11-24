@@ -8,7 +8,6 @@
     <div class="user-profile">
         <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="profileImg">
     </div>
-    <span class="centered">{{ session('message') }}</span>
     <h2 class="profile-letters">Nome:</h2> 
     <h3>{{$user->name}}</h3>
     <h2 class="profile-letters">Email:</h2> 
