@@ -35,14 +35,22 @@
   <div class="user-profile">
     <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="profileImg">
   </div>
+  <br>
   <input type="file" name="photo" accept="image/*" id="photoUpload">
   @error('photo') <span>{{ $message }}</span> @enderror
-
-  <div>
-    <input type="checkbox" name="use_default" id="useDefault" value="1" {{ old('use_default', $user->photo == 'uploads/defaultPhoto.jpg' ? 1 : 0) ? 'checked' : '' }}>
-    Usar foto padrão
-  </div>
-
+  <br>
+    <label class="container">
+    <input 
+      type="checkbox" 
+      name="use_default" 
+      id="useDefault" 
+      value="1" 
+      {{ old('use_default', $user->photo == 'uploads/defaultPhoto.jpg' ? 1 : 0) ? 'checked' : '' }}
+    >
+    <div class="checkmark"></div>
+    <span>Usar foto padrão</span> <!-- O texto ao lado do checkbox -->
+  </label>
+  <br>
   <button type="submit" class="signs">Atualizar</button>
 </form>
 @endif
