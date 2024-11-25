@@ -197,7 +197,7 @@ use App\Models\Tag;
               <div class="profile_name">{{ Auth::user()->name }}</div>
             </div>
           </a>
-          <i class='bx bx-cog'></i>
+          
         </div>
         @endif
         @if(Auth::guest())
