@@ -9,36 +9,29 @@ class Topic extends Post
 {
     use HasFactory;
 
-    protected $fillable = [
-        'title',
-        'description',
-        'status',
-        'category_id'
-    ];
+    protected $fillable = ['title', 'description', 'status', 'category_id'];
 
-     // Relacionamento Polimórfico
-     public function post()
-     {
-         return $this->morphOne(Post::class, 'postable');
-     }
- 
-     // public function post()
-     // {
-     //     return $this->belongsTo(Post::class);
-     // }
- 
-     public function category()
-     {
-         return $this->belongsTo(Category::class);
-     }
- 
-     public function comments()
-     {
-         return $this->hasMany(Comment::class);
-     }
- 
-     public function tags()
-     {
-         return $this->belongsToMany(Tag::class);
-     }
+    // Relacionamento polimórfico com Post
+    public function post()
+    {
+        return $this->morphOne(Post::class, 'postable');
+    }
+
+    // Relacionamento com Category
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    // Relacionamento com Comments
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->distinct();
+    }
+
+    // Relacionamento com Tags
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

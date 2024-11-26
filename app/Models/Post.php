@@ -9,26 +9,23 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = [
-        'image',
+        'image', 
         'user_id'
     ];
 
-    // Relacionamento Polimórfico
+    // Relacionamento polimórfico
     public function postable()
     {
-        return $this->morphTo();
+        return $this->morphTo(); // Determina o modelo associado (Comment ou Topic)
     }
 
-    // public function topic()
-    // {
-    //     return $this->hasOne(Topic::class, 'id');
-    // }
-
+    // Relacionamento com User
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    // Relacionamento com Rate
     public function rates()
     {
         return $this->hasMany(Rate::class);

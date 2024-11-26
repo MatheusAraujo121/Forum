@@ -60,6 +60,43 @@
       // Adiciona um evento de "change" ao checkbox
       useDefaultCheckbox.addEventListener('change', togglePhotoUpload);
     });
+
+     // Seleciona os elementos
+    const photoUpload = document.getElementById('photoUpload');
+    const profileImg = document.getElementById('profileImg');
+    const useDefault = document.getElementById('useDefault');
+
+    // URL da imagem padrão
+    const defaultPhotoUrl = "{{ asset('storage/uploads/defaultPhoto.jpg') }}";
+
+    // Adiciona evento ao input de upload de arquivo
+    photoUpload.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                profileImg.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Adiciona evento ao checkbox de usar foto padrão
+    useDefault.addEventListener('change', (event) => {
+        if (event.target.checked) {
+            // Se marcado, exibe a foto padrão
+            profileImg.src = defaultPhotoUrl;
+
+            // Opcional: desabilitar o input de upload para evitar confusão
+            photoUpload.disabled = true;
+        } else {
+            // Se desmarcado, habilita o input de upload novamente
+            photoUpload.disabled = false;
+
+            // Opcional: pode retornar para uma imagem anterior se necessário
+        }
+    });
   </script>
 </body>
 
