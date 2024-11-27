@@ -49,7 +49,7 @@ use App\Models\Tag;
       <li>
       <div class="iocn-link">
           <a href="#">
-            <i class="fa-solid fa-bookmark"></i>
+            <i class="fa-solid fa-comment"></i>
             <span class="link_name">Comentarios</span>
           </a>
           <i class='bx bxs-chevron-down arrow'></i>
@@ -176,21 +176,7 @@ use App\Models\Tag;
                 </li>
               </ul>
             </li>-->
-      @if(Auth::check())
-      @if(Auth::user()->id == 1)
-      <li>
-        <a href="{{ route('newReport') }}">
-          <i class="fa-solid fa-triangle-exclamation"></i>
-          <span class="link_name">Denúncias</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li>
-            <a class="link_name" href="#">Denúncias</a>
-          </li>
-        </ul>
-      </li>
-      @endif
-      @endif
+      
       <!-- @if(Auth::guest())
             @endif -->
       <!-- <li>
@@ -274,7 +260,6 @@ use App\Models\Tag;
               <button class="dropdown-item" type="button">Meu perfil</button>
             </a>
           </li>
-          <li><button class="dropdown-item" type="button">Configurações</button></li>
           <hr>
           <a class="profile-content" href="{{ route('logout') }}">
             <li>

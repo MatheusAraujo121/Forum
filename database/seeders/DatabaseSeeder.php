@@ -15,6 +15,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UserSeeder::class);
-        $this->call(TestPolymorphismSeeder::class);
+        $this->call(CommentSeeder::class);
     }
 }

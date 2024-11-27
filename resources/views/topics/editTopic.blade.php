@@ -8,6 +8,7 @@
 
       <form class="formd" action="{{ route('editTopic') }}" method="POST">
       @csrf
+      @method('put')
         <div class="input-group">
           <label for="title">Título do tópico</label>
           <input type="text" id="title" name="title" value="">

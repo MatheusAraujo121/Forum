@@ -94,6 +94,12 @@ class UserController extends Controller
 
     public function deleteUser(Request $request, $uid)
     {
+        $user = User::where('id', $uid)->first();
+        
+        if($user->photo == 'uploads/defaultPhoto.jpg'){
+            $user->update(['photo' => null]);
+        }
+
         $user = User::where('id', $uid)->delete();
 
         return redirect()->route('FirstPage')

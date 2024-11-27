@@ -1,8 +1,9 @@
-@extends('layouts.liop')
+
+@extends('layouts.gpt')
 
 @section('title', 'Comentários')
 
-@section('header', 'Listar comentários')
+@section('header', 'Listar todos os comentários')
 
 @section('content')
 <h1 class="welcome-text centered">Comentários cadastrados</h1>
