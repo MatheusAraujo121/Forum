@@ -22,5 +22,11 @@ class UserSeeder extends Seeder
             'password' => Hash::make('12345678'),
             'photo' => 'uploads/shrek.jpeg',
         ]);
+        User::create([
+            'name' => 'Denki',
+            'email' => 'denki@gmail.com',
+            'password' => Hash::make('12345678'),
+            'photo' => 'uploads/defaultPhoto.jpg',
+        ]);
     }
 }

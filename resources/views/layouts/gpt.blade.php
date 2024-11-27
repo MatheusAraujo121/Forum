@@ -47,6 +47,25 @@ use App\Models\Tag;
         </ul>
       </li>
       <li>
+      <div class="iocn-link">
+          <a href="#">
+            <i class="fa-solid fa-bookmark"></i>
+            <span class="link_name">Comentarios</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow'></i>
+        </div>
+        <ul class="sub-menu">
+          @if(Auth::check())
+          <li>
+            <a href="{{ route('newComment') }}">Criar novo comentário</a>
+          </li>
+          <li>
+            <a href="{{ route('viewComment') }}">Visualizar comentários</a>
+          </li>
+          @endif
+        </ul>
+      </li>
+      <li>
         <a href="#">
           <!--<i class='bx bx-line-chart' ></i>-->
           <i class="fa-solid fa-arrow-trend-up"></i>
@@ -197,7 +216,7 @@ use App\Models\Tag;
               <div class="profile_name">{{ Auth::user()->name }}</div>
             </div>
           </a>
-          
+
         </div>
         @endif
         @if(Auth::guest())

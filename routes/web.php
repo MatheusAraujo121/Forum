@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TopicController;
+use App\Http\Controllers\CommentController;
 
 //Authentication routes
 Route::match(['get', 'post'], '/login', [AuthController::class, 'loginUser'])->name('login');
@@ -65,6 +66,16 @@ Route::group(['prefix' => 'topic', 'middleware' => ['auth']], function () {
 
 
  
+});
+
+//Comment routes 
+Route::group(['prefix' => 'comment', 'middleware' => ['auth']], function () {
+    Route::get('/', [CommentController::class, 'index'])->name('viewComment');
+    Route::get('/create', [CommentController::class, 'create'])->name('newComment');
+    Route::post('/create', [CommentController::class, 'store'])->name('createComment');
+    Route::get('/{id}/edit', [CommentController::class, 'edit'])->name('editComment');
+    Route::put('/{id}/edit', [CommentController::class, 'update'])->name('updateComment');
+    Route::delete('/{id}/destroy', [CommentController::class, 'destroy'])->name('deleteComment');
 });
 
 //Tags routes
