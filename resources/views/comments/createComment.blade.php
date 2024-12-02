@@ -5,22 +5,21 @@
 @section('FormTitle', 'Criar novo comentário')
 
 @section('content')
-<form action="{{ route('createComment') }}" method="POST">
+<form action="{{ route('createComment') }}" method="POST" enctype="multipart/form-data">
     @csrf
-    <div>
-        <label for="content">Conteúdo:</label>
-        <textarea id="content" name="content" required></textarea>
-        @error('content') <span>{{ $message }}</span> @enderror
-    </div>
-    <div>
-        <label for="topic_id">Tópico:</label>
-        <select id="topic_id" name="topic_id" required>
-            @foreach ($topics as $topic)
-            <option value="{{ $topic->id }}">{{ $topic->title }}</option>
-            @endforeach
-        </select>
-        @error('topic_id') <span>{{ $message }}</span> @enderror
-    </div>
-    <button type="submit">Criar</button>
+    <label for="content">Conteúdo:</label>
+    <textarea name="content" id="content" required></textarea>
+
+    <label for="topic_id">Tópico:</label>
+    <select name="topic_id" id="topic_id" required>
+        @foreach($topics as $topic)
+            <option value="{{ $topic->id }}">{{ $topic->name }}</option>
+        @endforeach
+    </select>
+
+    <label for="image">Imagem (opcional):</label>
+    <input type="file" name="image" id="image" accept="image/*">
+
+    <button type="submit">Criar Comentário</button>
 </form>
 @endsection

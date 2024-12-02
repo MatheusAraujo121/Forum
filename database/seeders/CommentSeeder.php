@@ -9,7 +9,7 @@ use App\Models\Comment;
 use App\Models\Category;
 
 
-class TestPolymorphismSeeder extends Seeder
+class CommentSeeder extends Seeder
 {
     public function run()
     {

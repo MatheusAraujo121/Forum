@@ -25,7 +25,15 @@ class CommentController extends Controller
         $validated = $request->validate([
             'content' => 'required|string',
             'topic_id' => 'required|exists:topics,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
         ]);
+
+        if ($request->hasFile('image')) {
+            // Salva a imagem no diretório 'images/comments' e obtém o caminho
+            $imagePath = $request->file('image')->store('images/comments', 'public');
+            $validated['image_path'] = $imagePath;
+        }
+
 
         Comment::create($validated);
         return redirect()->route('viewComment')->with('message', 'Comentário criado com sucesso!');
@@ -43,10 +51,24 @@ class CommentController extends Controller
         $validated = $request->validate([
             'content' => 'required|string',
             'topic_id' => 'required|exists:topics,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $comment = Comment::findOrFail($id);
+       
+        if ($request->hasFile('image')) {
+            // Apaga a imagem antiga se houver
+            if ($comment->image_path) {
+                \Storage::delete('public/' . $comment->image_path);
+            }
+    
+            // Salva a nova imagem
+            $imagePath = $request->file('image')->store('images/comments', 'public');
+            $validated['image_path'] = $imagePath;
+        }
+
         $comment->update($validated);
+        
 
         return redirect()->route('viewComment')->with('message', 'Comentário atualizado com sucesso!');
     }

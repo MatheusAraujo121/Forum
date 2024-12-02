@@ -76,6 +76,7 @@ Route::group(['prefix' => 'comment', 'middleware' => ['auth']], function () {
     Route::get('/{id}/edit', [CommentController::class, 'edit'])->name('editComment');
     Route::put('/{id}/edit', [CommentController::class, 'update'])->name('updateComment');
     Route::delete('/{id}/destroy', [CommentController::class, 'destroy'])->name('deleteComment');
+    Route::resource('comments', CommentController::class);
 });
 
 //Tags routes
