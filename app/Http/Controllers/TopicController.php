@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Topic;
@@ -17,110 +17,99 @@ class TopicController extends Controller
         return view('topics.listTopics', compact('topics'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $categories = Category::all();
         return view('topics.createTopic', ['categories' => $categories]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
-    {       
+    {
         $userId = Auth::id();
 
         $request->validate([
-            'title' => 'required|string',
-            'description' => 'required|string',
-            'image' => 'required|string',
-            'status' => 'required|int',
-            'category' => 'required'
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif',
+            'status' => 'required|integer',
+            'category' => 'required|exists:categories,id',
         ]);
+
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = uniqid() . '-' . $file->getClientOriginalName();
+            $imagePath = $file->storeAs('uploads', $fileName);
+        }
 
         $topic = Topic::create([
             'title' => $request->title,
             'description' => $request->description,
             'status' => $request->status,
-            'category_id' => $request->category
+            'category_id' => $request->category,
         ]);
 
         $topic->post()->create([
-            'user_id' => Auth::id(),
-            'image' => $request->image,
-            // 'image' => $request->file('image')->store('images', 'public')
+            'user_id' => $userId,
+            'image' => $imagePath,
         ]);
 
-        // $topic = new Topic([
-        //     'title' => $request->title,
-        //     'description' => $request->description,
-        //     'status' => $request->status,
-        //     'category_id' => $request->category
-        // ]);
-
-        // $post = new Post([
-        //     'image' => $request->image
-        // ]);
-
-        
-        // $topic->post()->save($post);
-
-
-
-        return redirect()->route('viewTopic');
-        
+        return redirect()->route('viewTopic')->with('success', 'Topic created successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $topic = Topic::with('post')->findOrFail($id);
+        $categories = Category::all();
+        return view('topics.editTopic', compact('topic', 'categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $topic = Topic::findOrFail($id);
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
+            'status' => 'required|integer',
+            'category' => 'required|exists:categories,id',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $topic->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'status' => $request->status,
+            'category_id' => $request->category,
+        ]);
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = uniqid() . '-' . $file->getClientOriginalName();
+            $imagePath = $file->storeAs('uploads', $fileName);
+
+            if ($topic->post->image && $topic->post->image !== 'uploads/defaultPhoto.jpg') {
+                Storage::delete($topic->post->image);
+            }
+
+            $topic->post->update(['image' => $imagePath]);
+        }
+
+        return redirect()->route('viewTopic')->with('success', 'Topic updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $topic = Topic::with('post')->findOrFail($id);
+
+        if ($topic->post->image && $topic->post->image !== 'uploads/defaultPhoto.jpg') {
+            Storage::delete($topic->post->image);
+        }
+
+        $topic->comments()->delete();
+        $topic->post()->delete();
+        $topic->delete();
+
+        return redirect()->route('viewTopic')->with('success', 'Topic deleted successfully!');
     }
 }

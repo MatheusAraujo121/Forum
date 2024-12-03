@@ -13,7 +13,7 @@
     <label for="topic_id">Tópico:</label>
     <select name="topic_id" id="topic_id" required>
         @foreach($topics as $topic)
-            <option value="{{ $topic->id }}">{{ $topic->name }}</option>
+            <option value="{{ $topic->id }}">{{ $topic->title }}</option>
         @endforeach
     </select>
 

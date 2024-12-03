@@ -6,7 +6,7 @@
 
 @section('content')
 
-<form class="formd" action="{{ route('createTopic') }}" method="POST">
+<form class="formd" action="{{ route('createTopic') }}" method="POST" enctype="multipart/form-data">
   @csrf
   <div class="input-group">
     <label for="title">Título do tópico</label>
@@ -25,7 +25,7 @@
   </div>
   <div class="input-group">
     <label for="image" class="form-label">Imagem</label>
-    <input type="text" name="image" id="image" class="form-control" />
+    <input type="file" name="image">
     @error('image') <span>{{ $message }}</span> <br /> @enderror
   </div>
   <div class="input-group">

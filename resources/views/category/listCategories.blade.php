@@ -24,7 +24,7 @@
                 <td>
                     <div class="opc">
                         <a class="lgn-3" href="{{ route('ViewCategory', [$category->id]) }}">
-                            <button class="buttonsd tooltip">
+                            <button class="buttonsd tooltipa">
                                 <i class="fa-solid fa-pencil"></i>
                                 <span class="tooltiptext">Visualizar Categoria</span>
                             </button>
@@ -32,7 +32,7 @@
                         <form action="{{route('DeleteCategory', [$category->id])}}" method="POST" class="login-form">
                             @csrf
                             @method('delete')
-                            <button class="buttonsd tooltip">
+                            <button class="buttonsd tooltipa">
                                 <i class="fa-solid fa-ban"></i>
                                 <span class="tooltiptext">Excluir</span>
                             </button>

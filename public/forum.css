@@ -1067,12 +1067,12 @@ tbody tr:hover {
    99px 72px 143px rgba(0, 0, 0, 0.08);
  }
  
- .tooltip {
+ .tooltipa {
   position: relative;
   display: inline-block;
  }
  
- .tooltip .tooltiptext {
+.tooltipa .tooltiptext {
   visibility: hidden;
   width: 4em;
   background-color: rgba(0, 0, 0, 0.253);
@@ -1110,7 +1110,7 @@ tbody tr:hover {
 .delete-buttons {
   background-color: red;
 }
- .tooltip .tooltiptext::after {
+ .tooltipa .tooltiptext::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -1121,7 +1121,7 @@ tbody tr:hover {
   border-color: transparent rgba(0, 0, 0, 0.253) transparent transparent;
  }
  
- .tooltip:hover .tooltiptext {
+ .tooltipa:hover .tooltiptext {
   visibility: visible;
  }
  .fa-ban{
@@ -1515,3 +1515,13 @@ tbody tr:hover {
   transform: rotate(45deg);
 }
 
+.topic-image {
+  margin-right: 10px;
+  overflow: hidden;
+  width: 55px;
+  height: 55px;
+  border-radius: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

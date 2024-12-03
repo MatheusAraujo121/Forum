@@ -22,7 +22,7 @@
                 <td>
                     <div class="opc">
                         <a class="lgn-3" href="{{ route('ViewTag', [$tag->id]) }}">
-                            <button class="buttonsd tooltip">
+                            <button class="buttonsd tooltipa">
                                 <i class="fa-solid fa-pencil"></i>
                                 <span class="tooltiptext">Visualizar tag</span>
                             </button>
@@ -30,7 +30,7 @@
                         <form action="{{route('DeleteTag', [$tag->id])}}" method="POST" class="login-form">
                             @csrf
                             @method('delete')
-                            <button class="buttonsd tooltip">
+                            <button class="buttonsd tooltipa">
                                 <i class="fa-solid fa-ban"></i>
                                 <span class="tooltiptext">Excluir</span>
                             </button>

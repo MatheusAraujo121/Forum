@@ -17,6 +17,7 @@ class CommentController extends Controller
     public function create()
     {
         $topics = Topic::all();
+        //dd($topics);
         return view('comments.createComment', compact('topics'));
     }
 
@@ -30,7 +31,7 @@ class CommentController extends Controller
 
         if ($request->hasFile('image')) {
             // Salva a imagem no diretório 'images/comments' e obtém o caminho
-            $imagePath = $request->file('image')->store('images/comments', 'public');
+            $imagePath = $request->file('image')->store('storage', 'public');
             $validated['image_path'] = $imagePath;
         }
 

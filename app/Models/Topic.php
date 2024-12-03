@@ -9,7 +9,12 @@ class Topic extends Post
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'status', 'category_id'];
+    protected $fillable = [
+        'title', 
+        'description', 
+        'status', 
+        'category_id'
+    ];
 
     // Relacionamento polimórfico com Post
     public function post()

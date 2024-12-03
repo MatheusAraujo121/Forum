@@ -23,21 +23,23 @@
                 <td>{{$topic->id}}
                 <td>{{$topic->title}}
                 <td>{{$topic->description}}
-                <td>{{$topic->image}}
+                <td><div class="topic-image">
+                    <img src="{{ asset('storage/' .$topic->post->image) }}" alt="profileImg">
+                </div>
                 <td>{{$topic->status}}
-                <td>{{$topic->category_id}}
+                <td>{{$topic->category->title}}
                 <td>
                     <div class="opc">
                         <a class="lgn-3" href="{{ route('editTopic', [$topic->id]) }}">
-                            <button class="buttonsd tooltip">
+                            <button class="buttonsd tooltipa">
                                 <i class="fa-solid fa-pencil"></i>
                                 <span class="tooltiptext">Visualizar Topico</span>
                             </button>
                         </a>
-                        <form action="{{route('DeleteTag', [$topic->id])}}" method="POST" class="login-form">
+                        <form action="{{route('deleteTopic', [$topic->id])}}" method="POST" class="login-form">
                             @csrf
                             @method('delete')
-                            <button class="buttonsd tooltip">
+                            <button class="buttonsd tooltipa">
                                 <i class="fa-solid fa-ban"></i>
                                 <span class="tooltiptext">Excluir</span>
                             </button>
