@@ -7,16 +7,16 @@
 @section('content')
 <h1 class="welcome-text centered">Lista de tags</h1>
 <br><br><br><br>
-        <table>
-            <thead>
-                <tr>
-                <th>ID
-                <th>Título
-                <th>Opções
-            </thead>
-            <tbody>
-            @foreach ($tags as $tag)
-                <tr>
+<table>
+    <thead>
+        <tr>
+            <th>ID
+            <th>Título
+            <th>Opções
+    </thead>
+    <tbody>
+        @foreach ($tags as $tag)
+            <tr>
                 <td>{{$tag->id}}
                 <td>{{$tag->title}}
                 <td>
@@ -34,9 +34,9 @@
                                 <i class="fa-solid fa-ban"></i>
                                 <span class="tooltiptext">Excluir</span>
                             </button>
-                        </form>    
+                        </form>
                     </div>
-                @endforeach
-            </tbody>
-        </table>
+        @endforeach
+    </tbody>
+</table>
 @endsection

@@ -4,5 +4,5 @@
 
 @section('content')
 
-    <h1>Usuário deslogado</h1>   
+<h1>Usuário deslogado</h1>
 @endsection

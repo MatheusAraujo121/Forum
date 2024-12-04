@@ -6,319 +6,296 @@ use App\Models\Tag;
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@yield('title')</title>
-  <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
-  <link rel='stylesheet' href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css'>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css'>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link rel="stylesheet" href="{{ asset('forum.css') }}">
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title')</title>
+    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('forum.css') }}">
+  </head>
 
-<body>
-  <div class="sidebar close">
-    <div>
-      <button class="navbar-toggle">Toggle</button>
-      <i class='bx bx-menu'></i>
-    </div>
-    <ul class="nav-links">
-      <li>
-        <div class="iocn-link">
-          <a href="#">
-            <i class="fa-solid fa-bookmark"></i>
-            <span class="link_name">Tópicos</span>
-          </a>
-          <i class='bx bxs-chevron-down arrow'></i>
-        </div>
-        <ul class="sub-menu">
-          <li>
-            <a class="link_name" href="#">Tópicos</a>
-          </li>
-          @if(Auth::check())
-          <li>
-            <a href="{{ route('newTopic') }}">Criar novo tópico</a>
-          </li>
-          @endif
-          <li>
-            <a href="{{ route('viewTopic') }}">Visualizar tópicos</a>
-          </li>
-        </ul>
-      </li>
-      <li>
-      <div class="iocn-link">
-          <a href="#">
-            <i class="fa-solid fa-comment"></i>
-            <span class="link_name">Comentarios</span>
-          </a>
-          <i class='bx bxs-chevron-down arrow'></i>
-        </div>
-        <ul class="sub-menu">
-          @if(Auth::check())
-          <li>
-            <a href="{{ route('newComment') }}">Criar novo comentário</a>
-          </li>
-          <li>
-            <a href="{{ route('viewComment') }}">Visualizar comentários</a>
-          </li>
-          @endif
-        </ul>
-      </li>
-      <li>
-        <a href="#">
-          <!--<i class='bx bx-line-chart' ></i>-->
-          <i class="fa-solid fa-arrow-trend-up"></i>
-          <span class="link_name">Em alta</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li>
-            <a class="link_name" href="#">Tópicos em alta</a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <div class="iocn-link">
-          <a href="#">
-            <!--<i class='bx bx-collection' ></i>-->
-            <i class="fa-solid fa-tags"></i>
-            <span class="link_name">Tags</span>
-          </a>
-          <i class='bx bxs-chevron-down arrow'></i>
-        </div>
-        <ul class="sub-menu">
-          <li>
-            <a class="link_name" href="#">Tags</a>
-          </li>
-          @if(Auth::check())
-          <li>
-            <a href="{{ route('newTag') }}">Criar nova tag</a>
-          </li>
-          <!-- <li>
-                        <a href="{{ url('/edittag') }}">Editar tag</a>
-                      </li> -->
-          @endif
-          <li>
-            <a href="{{ route('listTags') }}">Visualizar tags</a>
-          </li>
-        </ul>
-      </li>
-      @if(Auth::check())
-      <li>
-        <div class="iocn-link">
-          <a href="#">
-            <i class='bx bxs-book-alt'></i>
-            <span class="link_name">Categorias</span>
-          </a>
-          <i class='bx bxs-chevron-down arrow'></i>
-        </div>
-        <ul class="sub-menu">
-          <li>
-            <a class="link_name" href="#">Categorias</a>
-          </li>
-          <li>
-            <a href="{{ route('categoryCreate') }}">Criar nova categoria</a>
-          </li>
-          <!--<li>
-                    <a href="{{ url('/editpost') }}">Editar postagem</a>
-                  </li>-->
-          <li>
-            <a href="{{ route('listCategories') }}">Lista de categorias</a>
-          </li>
-        </ul>
-      </li>
-      @endif
-      <!--<li>
-              <a href="#">
-                <i class='bx bx-pie-chart-alt-2' ></i>
-                <span class="link_name">Analytics</span>
-              </a>
-              <ul class="sub-menu blank">
-                <li>
-                  <a class="link_name" href="#">Analytics</a>
-                </li>
-              </ul>
-            </li>-->
-      @if(Auth::check())
-      @if(Auth::user()->id == 1)
-      <li>
-        <div class="iocn-link">
-          <a href="{{ route('routeListAllUsers') }}">
-            <!--<i class='bx bx-plug' ></i>-->
-            <i class="fa-solid fa-users"></i>
-            <span class="link_name">Usuários</span>
-          </a>
-        </div>
-      </li>
-      @endif
-      @endif
-      @if(Auth::guest())
-      @endif
-      <!--<li>
-              <a href="#">
-                <i class='bx bx-compass' ></i>
-                <span class="link_name">Explore</span>
-              </a>
-              <ul class="sub-menu blank">
-                <li>
-                  <a class="link_name" href="#">Explore</a>
-                </li>
-              </ul>
-            </li>-->
-      <!--<li>
-              <a href="#">
-                <i class='bx bx-history'></i>
-                <span class="link_name">History</span>
-              </a>
-              <ul class="sub-menu blank">
-                <li>
-                  <a class="link_name" href="#">History</a>
-                </li>
-              </ul>
-            </li>-->
-      
-      <!-- @if(Auth::guest())
-            @endif -->
-      <!-- <li>
-        <a href="#">
-          <i class='bx bx-cog'></i>
-          <span class="link_name">Configurações</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li>
-            <a class="link_name" href="#">Configurações</a>
-          </li>
-        </ul>
-      </li> -->
-      <li>
-        <hr>
+  <body>
+    <div class="sidebar close">
+      <div>
+        <button class="navbar-toggle">Toggle</button>
+        <i class='bx bx-menu'></i>
+      </div>
+      <ul class="nav-links">
+        <li>
+          <div class="iocn-link">
+            <a href="#">
+              <i class="fa-solid fa-bookmark"></i>
+              <span class="link_name">Tópicos</span>
+            </a>
+            <i class='bx bxs-chevron-down arrow'></i>
+          </div>
+          <ul class="sub-menu">
+            <li>
+              <a class="link_name" href="#">Tópicos</a>
+            </li>
+            @if(Auth::check())
+              <li>
+                <a href="{{ route('newTopic') }}">Criar novo tópico</a>
+              </li>
+            @endif
+            <li>
+              <a href="{{ route('viewTopic') }}">Visualizar tópicos</a>
+            </li>
+          </ul>
+        </li>
         @if(Auth::check())
-        <div class="profile-details">
-          <a href="{{ route('routeListUserByIDS', [Auth::user()->id]) }}">
-            <div class="profile-content">
-              <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="profileImg">
+          <li>
+            <div class="iocn-link">
+              <a href="#">
+                <i class="fa-solid fa-comment"></i>
+                <span class="link_name">Comentarios</span>
+              </a>
+              <i class='bx bxs-chevron-down arrow'></i>
             </div>
-            <div class="name-job">
-              <div class="profile_name">{{ Auth::user()->name }}</div>
-            </div>
+            <ul class="sub-menu">
+              <li>
+                <a href="{{ route('viewComment') }}">Visualizar comentários</a>
+              </li>
+            </ul>
+          </li>
+        @endif
+        <li>
+          <a href="#">
+            <i class="fa-solid fa-arrow-trend-up"></i>
+            <span class="link_name">Em alta</span>
           </a>
-
-        </div>
+          <ul class="sub-menu blank">
+            <li>
+              <a class="link_name" href="#">Tópicos em alta</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <div class="iocn-link">
+            <a href="#">
+              <i class="fa-solid fa-tags"></i>
+              <span class="link_name">Tags</span>
+            </a>
+            <i class='bx bxs-chevron-down arrow'></i>
+          </div>
+          <ul class="sub-menu">
+            <li>
+              <a class="link_name" href="#">Tags</a>
+            </li>
+            @if(Auth::check())
+              <li>
+                <a href="{{ route('newTag') }}">Criar nova tag</a>
+              </li>
+            @endif
+            <li>
+              <a href="{{ route('listTags') }}">Visualizar tags</a>
+            </li>
+          </ul>
+        </li>
+        @if(Auth::check())
+          <li>
+            <div class="iocn-link">
+              <a href="#">
+                <i class='bx bxs-book-alt'></i>
+                <span class="link_name">Categorias</span>
+              </a>
+              <i class='bx bxs-chevron-down arrow'></i>
+            </div>
+            <ul class="sub-menu">
+              <li>
+                <a class="link_name" href="#">Categorias</a>
+              </li>
+              <li>
+                <a href="{{ route('categoryCreate') }}">Criar nova categoria</a>
+              </li>
+              <li>
+                <a href="{{ route('listCategories') }}">Lista de categorias</a>
+              </li>
+            </ul>
+          </li>
+        @endif
+        @if(Auth::check())
+          @if(Auth::user()->id == 1)
+            <li>
+              <div class="iocn-link">
+                <a href="{{ route('routeListAllUsers') }}">
+                  <i class="fa-solid fa-users"></i>
+                  <span class="link_name">Usuários</span>
+                </a>
+              </div>
+            </li>
+          @endif
         @endif
         @if(Auth::guest())
-        <a class="lgn" href="{{ route('login') }}">
-          <div class="btn-login">
-            Faça login
-          </div>
-        </a>
         @endif
-      </li>
-    </ul>
-  </div>
-
-  <nav class="navbar">
-    <a href="{{ route('FirstPage') }}">
-      <div class="logo-details">
-        <img class="logo-img" src="{{ asset('img/logo.png') }}" />
-      </div>
-    </a>
-    <ul class="navbar-links">
-      <div class="home-content">
-        <div class="menu">
-        </div>
-      </div>
-    </ul>
-    <div class="justify-content-center centered2">
-      <form class="formv">
-        <label for="search">
-          <input class="inputv" type="text" required="" placeholder="Pesquisar..." id="search">
-          <div class="fancy-bg"></div>
-          <div class="search">
-            <svg viewBox="0 0 24 24" aria-hidden="true" class="r-14j79pv r-4qtqp9 r-yyyyoo r-1xvli5t r-dnmrzs r-4wgw6l r-f727ji r-bnwqim r-1plcrui r-lrvibr">
-              <g>
-                <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
-              </g>
-            </svg>
-          </div>
-          <button class="close-btn" type="reset">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-            </svg>
-          </button>
-        </label>
-      </form>
-    </div>
-    @if(Auth::check())
-    <div class="menu-profile">
-      <div class="btn-group dropstart">
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-          {{ Auth::user()->name }}
-        </button>
-        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start DropOPC">
-          <li>
-            <a class="profile-link" href="{{ route('routeListUserByIDS', [Auth::user()->id]) }}">
-              <button class="dropdown-item" type="button">Meu perfil</button>
-            </a>
-          </li>
+        <li>
           <hr>
-          <a class="profile-content" href="{{ route('logout') }}">
-            <li>
-              <button class="btn-logout">
-                <div class="sign">
-                  <svg class="logout-icon" viewBox="0 0 512 512">
-                    <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>
-                  </svg>
+          @if(Auth::check())
+            <div class="profile-details">
+              <a href="{{ route('routeListUserByIDS', [Auth::user()->id]) }}">
+                <div class="profile-content">
+                  <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="profileImg">
                 </div>
-              </button>
-            </li>
-          </a>
-        </ul>
-      </div>
-      <a class="profile-link" href="{{ route('routeListUserByIDS', [Auth::user()->id]) }}">
-        <div class="user-picture">
-          <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="profileImg">
+                <div class="name-job">
+                  <div class="profile_name">{{ Auth::user()->name }}</div>
+                </div>
+              </a>
+            </div>
+          @endif
+          @if(Auth::guest())
+            <a class="lgn" href="{{ route('login') }}">
+                <div class="btn-login">Faça login</div>
+            </a>
+          @endif
+        </li>
+      </ul>
+    </div>
+    <nav class="navbar">
+      <a href="{{ route('FirstPage') }}">
+        <div class="logo-details">
+          <img class="logo-img" src="{{ asset('img/logo.png') }}" />
         </div>
       </a>
-    </div>
-
-
-
-    @endif
-    @if(Auth::guest())
-    <a class="lgn-2" href="{{ route('register') }}">
-      <div class="btn-register">
-        Faça cadastro
+      <ul class="navbar-links">
+        <div class="home-content">
+          <div class="menu">
+          </div>
+        </div>
+      </ul>
+      <div class="justify-content-center centered2">
+        
       </div>
-    </a>
-    @endif
-  </nav>
-
-  <div class="centered background">
-
-    <div class="content">
-      <h4 class="centered green">{{ session('message') }}</h4><br><br>
-      @yield('content')
+      @if(Auth::check())
+        <div class="menu-profile">
+          <div class="btn-group dropstart">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false"> {{ Auth::user()->name }}</button>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start DropOPC">
+              <li>
+                <a class="profile-link" href="{{ route('routeListUserByIDS', [Auth::user()->id]) }}">
+                  <button class="dropdown-item" type="button">Meu perfil</button>
+                </a>
+              </li>
+              <hr>
+              <a class="profile-content" href="{{ route('logout') }}">
+                <li>
+                  <button class="btn-logout">
+                    <div class="sign">
+                      <svg class="logout-icon" viewBox="0 0 512 512">
+                        <path
+                          d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z">
+                        </path>
+                      </svg>
+                    </div>
+                  </button>
+                </li>
+              </a>
+            </ul>
+          </div>
+          <a class="profile-link" href="{{ route('routeListUserByIDS', [Auth::user()->id]) }}">
+            <div class="user-picture">
+              <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="profileImg">
+            </div>
+          </a>
+        </div>
+      @endif
+      @if(Auth::guest())
+        <a class="lgn-2" href="{{ route('register') }}">
+          <div class="btn-register">Faça cadastro</div>
+        </a>
+      @endif
+    </nav>
+    <div class="centered background">
+      <div class="content">
+        <h4 class="centered green">{{ session('message') }}</h4><br><br>
+        @yield('content')
+      </div>
     </div>
-  </div>
-  <footer class="footer1 footer-border">
-    <p>Gamer's Web &copy; 2024</p>
-  </footer>
-  <script>
-    let arrow = document.querySelectorAll(".arrow");
-    for (var i = 0; i < arrow.length; i++) {
-      arrow[i].addEventListener("click", (e) => {
-        let arrowParent = e.target.parentElement.parentElement;
-        arrowParent.classList.toggle("showMenu");
-      });
-    }
-    let sidebar = document.querySelector(".sidebar");
-    let sidebarBtn = document.querySelector(".bx-menu");
-    console.log(sidebarBtn);
-    sidebarBtn.addEventListener("click", () => {
-      sidebar.classList.toggle("close");
-    });
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
+    <footer class="footer1 footer-border">
+      <p>Gamer's Web &copy; 2024</p>
+    </footer>
+    
+    <script>
+      
+      let arrow = document.querySelectorAll(".arrow");
+      
+      for (var i = 0; i < arrow.length; i++) {
+        
+        arrow[i].addEventListener("click", (e) => {
+          
+          let arrowParent = e.target.parentElement.parentElement;
+          arrowParent.classList.toggle("showMenu");
 
+        });
+      }
+      
+      let sidebar = document.querySelector(".sidebar");
+      
+      let sidebarBtn = document.querySelector(".bx-menu");
+      
+      console.log(sidebarBtn);
+      
+      sidebarBtn.addEventListener("click", () => {
+        
+        sidebar.classList.toggle("close");
+
+      });
+
+      document.getElementById('search').addEventListener('input', function () {
+        
+        const searchQuery = this.value.toLowerCase();
+        const items = document.querySelectorAll('#items-list li');
+
+        items.forEach(function (item) {
+          
+          if (item.textContent.toLowerCase().includes(searchQuery)) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+
+        });
+      });
+      
+      document.getElementById('search').addEventListener('input', function () {
+        
+        const searchQuery = this.value.toLowerCase();
+        const topics = document.querySelectorAll('.topic-item');
+
+        topics.forEach(function (topic) {
+
+          const title = topic.getAttribute('data-title').toLowerCase();
+          const category = topic.getAttribute('data-category').toLowerCase();
+          const tags = topic.getAttribute('data-tags').toLowerCase();
+
+          if (title.includes(searchQuery) || category.includes(searchQuery) || tags.includes(searchQuery)) {
+            topic.style.display = '';
+          } else {
+            topic.style.display = 'none';
+          }
+
+        });
+      });
+
+      const searchBar = document.getElementById('search');
+      const topicsList = document.getElementById('topics-list');
+      const closeButton = document.getElementById('close-button');
+
+      searchBar.addEventListener('focus', function () {
+
+        topicsList.style.display = 'block';
+
+      });
+
+      closeButton.addEventListener('click', function () {
+
+        topicsList.style.display = 'none';
+
+      });
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
 </html>

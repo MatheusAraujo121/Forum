@@ -16,27 +16,23 @@ class Topic extends Post
         'category_id'
     ];
 
-    // Relacionamento polimórfico com Post
     public function post()
     {
         return $this->morphOne(Post::class, 'postable');
     }
 
-    // Relacionamento com Category
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    // Relacionamento com Comments
     public function comments()
     {
         return $this->hasMany(Comment::class)->distinct();
     }
 
-    // Relacionamento com Tags
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class, 'topic_tags');
     }
 }

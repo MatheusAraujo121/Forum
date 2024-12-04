@@ -23,5 +23,5 @@
           <br>
           <button type="submit" class="signs">Atualizar</button>
       </form> 
-      @endif
+    @endif
 @endsection

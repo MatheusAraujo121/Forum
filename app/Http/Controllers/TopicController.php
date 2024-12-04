@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\Topic;
 use App\Models\Category;
 
@@ -20,7 +21,9 @@ class TopicController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('topics.createTopic', ['categories' => $categories]);
+        $tags = Tag::all();
+        return view('topics.createTopic', ['categories' => $categories, 'tags' => $tags]);
+
     }
 
     public function store(Request $request)
@@ -33,8 +36,9 @@ class TopicController extends Controller
             'image' => 'nullable|mimes:jpeg,png,jpg,gif',
             'status' => 'required|integer',
             'category' => 'required|exists:categories,id',
+            'tags' => 'nullable|array', 
+            'tags.*' => 'exists:tags,id', 
         ]);
-
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -51,11 +55,16 @@ class TopicController extends Controller
 
         $topic->post()->create([
             'user_id' => $userId,
-            'image' => $imagePath,
+            'image' => $imagePath ?? 'uploads/defaultPhoto.jpg', 
         ]);
+
+        if ($request->has('tags')) {
+            $topic->tags()->attach($request->tags); 
+        }
 
         return redirect()->route('viewTopic')->with('success', 'Topic created successfully!');
     }
+
 
     public function edit($id)
     {
@@ -73,8 +82,10 @@ class TopicController extends Controller
             'description' => 'required|string|max:1000',
             'status' => 'required|integer',
             'category' => 'required|exists:categories,id',
-            'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:tags,id',
         ]);
+
 
         $topic->update([
             'title' => $request->title,
@@ -83,20 +94,13 @@ class TopicController extends Controller
             'category_id' => $request->category,
         ]);
 
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $fileName = uniqid() . '-' . $file->getClientOriginalName();
-            $imagePath = $file->storeAs('uploads', $fileName);
-
-            if ($topic->post->image && $topic->post->image !== 'uploads/defaultPhoto.jpg') {
-                Storage::delete($topic->post->image);
-            }
-
-            $topic->post->update(['image' => $imagePath]);
+        if ($request->has('tags')) {
+            $topic->tags()->sync($request->tags); 
         }
 
         return redirect()->route('viewTopic')->with('success', 'Topic updated successfully!');
     }
+
 
     public function destroy($id)
     {
@@ -111,5 +115,10 @@ class TopicController extends Controller
         $topic->delete();
 
         return redirect()->route('viewTopic')->with('success', 'Topic deleted successfully!');
+    }
+    public function welcome()
+    {
+        $topics = Topic::with(['post.user', 'comments.user', 'tags', 'category'])->latest()->get();
+        return view('welcome', compact('topics'));
     }
 }

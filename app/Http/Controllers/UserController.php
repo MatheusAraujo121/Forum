@@ -26,29 +26,26 @@ class UserController extends Controller
 
     public function listUserByID(Request $request, $uid)
     {
-        //procurar o usuário no banco 
         $user = User::where('id', $uid)->first();
         return view('users.infoUser', ['user' => $user]);
     }
 
     public function listUserByIDS(Request $request, $uid)
     {
-        //procurar o usuário no banco 
         $user = User::where('id', $uid)->first();
         return view('users.profile', ['user' => $user]);
     }
 
     public function updateUser(Request $request, $uid)
     {
-        //procurar o usuário no banco 
         $user = User::where('id', $uid)->first();
 
         if ($request->has('use_default') && $request->input('use_default') == 1) {
-            if($user->photo == 'uploads/defaultPhoto.jpg'){
+            if ($user->photo == 'uploads/defaultPhoto.jpg') {
                 $user->update(['photo' => 'uploads/defaultPhoto.jpg']);
-            }else{
-            Storage::delete($user->photo);  
-            $user->update(['photo' => 'uploads/defaultPhoto.jpg']);
+            } else {
+                Storage::delete($user->photo);
+                $user->update(['photo' => 'uploads/defaultPhoto.jpg']);
             }
 
         } elseif ($request->hasFile('photo')) {
@@ -58,10 +55,9 @@ class UserController extends Controller
             if (!in_array($file->extension(), ['jpeg', 'png', 'jpg', 'gif'])) {
                 return redirect()->back()->withErrors(['photo' => 'O arquivo enviado não é uma imagem válida.']);
             }
-            if($user->photo == 'uploads/defaultPhoto.jpg'){
+            if ($user->photo == 'uploads/defaultPhoto.jpg') {
                 $user->update(['photo' => null]);
-            }
-            elseif ($user->photo && Storage::exists($user->photo)) {
+            } elseif ($user->photo && Storage::exists($user->photo)) {
                 Storage::delete($user->photo);
             }
 
@@ -95,8 +91,8 @@ class UserController extends Controller
     public function deleteUser(Request $request, $uid)
     {
         $user = User::where('id', $uid)->first();
-        
-        if($user->photo == 'uploads/defaultPhoto.jpg'){
+
+        if ($user->photo == 'uploads/defaultPhoto.jpg') {
             $user->update(['photo' => null]);
         }
 
@@ -115,32 +111,20 @@ class UserController extends Controller
 
             if ($request->hasFile('photo')) {
 
-                //Salva o nome do arquivo que está no input com name de photo
                 $file = $request->file('photo');
 
-                //Verifica se o arquivo é de alguma extensão aceita
                 if (!in_array($file->extension(), ['jpeg', 'png', 'jpg', 'gif'])) {
                     return redirect()->back()->withErrors(['photo' => 'O arquivo enviado não é uma imagem válida.']);
                 }
 
-                //Adiciona o nome da imagem com um número randomico na váriavel $file_name
                 $file_name = rand(0, 999999) . '-' . $request->file('photo')->getClientOriginalName();
-
-                //Salva o caminho da imagem em uma váriavel que vai ser passado pra ser salva no banco
                 $path = $request->file('photo')->storeAs('uploads', $file_name);
 
-                //Pega todas as informações do usuario
                 $data = $request->all();
-
-                //Separa somente o nome da photo para salvar no banco
                 $data['photo'] = $path;
             } else {
-                // Se o usuário não enviou uma foto, use uma imagem padrão
 
-                // Caminho da imagem padrão
                 $path = 'uploads/defaultPhoto.jpg';
-
-                // Atribuir a imagem padrão
                 $data['photo'] = $path;
             }
             $request->validate([

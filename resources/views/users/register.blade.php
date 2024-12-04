@@ -29,6 +29,13 @@
       <a rel="noopener noreferrer" href="#"></a>
     </div>
   </div>
+  <div class="input-group">
+    <label for="image" class="form-label">Imagem</label>
+    <div class="image-post" id="imagePreview" style="display: none;">
+      <img id="profileImg" src="" alt="profileImg">
+    </div>
+    <br>
+  </div>
   <input type="file" name="photo">
   @error('photo') <span>{{ $message }}</span> @enderror
   <button type="submit" value="Registrar" class="signs">Cadastrar</button>

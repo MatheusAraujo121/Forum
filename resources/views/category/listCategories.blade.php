@@ -7,17 +7,17 @@
 @section('content')
 <h1 class="welcome-text centered">Lista de categorias</h1>
 <br><br><br><br>
-        <table>
-            <thead>
-                <tr>
-                <th>ID
-                <th>Título
-                <th>Descrição
-                <th>Opções
-            </thead>
-            <tbody>
-            @foreach ($categories as $category)
-                <tr>
+<table>
+    <thead>
+        <tr>
+            <th>ID
+            <th>Título
+            <th>Descrição
+            <th>Opções
+    </thead>
+    <tbody>
+        @foreach ($categories as $category)
+            <tr>
                 <td>{{$category->id}}
                 <td>{{$category->title}}
                 <td>{{$category->description}}
@@ -36,9 +36,9 @@
                                 <i class="fa-solid fa-ban"></i>
                                 <span class="tooltiptext">Excluir</span>
                             </button>
-                        </form>    
+                        </form>
                     </div>
-                @endforeach
-            </tbody>
-        </table>
+        @endforeach
+    </tbody>
+</table>
 @endsection

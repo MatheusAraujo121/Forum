@@ -18,84 +18,100 @@
         <span class="buttonas-elem">
           <svg viewBox="0 0 46 40" xmlns="http://www.w3.org/2000/svg">
             <path
-              d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"></path>
+              d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z">
+            </path>
           </svg>
         </span>
         <span class="buttonas-elem">
           <svg viewBox="0 0 46 40">
             <path
-              d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"></path>
+              d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z">
+            </path>
           </svg>
         </span>
       </div>
     </button>
   </a>
-  <div class="form-container">
 
+  <div class="form-container">
     <p class="titles">@yield('FormTitle')</p>
     <br><span class="centered">{{ session('message') }}</span><br>
     @yield('content')
   </div>
+
   <script src="{{ asset('javascript.js') }}"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+
+    document.addEventListener('DOMContentLoaded', function () {
+
       const useDefaultCheckbox = document.getElementById('useDefault');
       const photoUploadInput = document.getElementById('photoUpload');
 
-      // Função para habilitar/desabilitar o campo de upload com base no checkbox
       function togglePhotoUpload() {
+
         if (useDefaultCheckbox.checked) {
-          // Desabilitar e limpar o campo de upload de foto
           photoUploadInput.disabled = true;
-          photoUploadInput.value = ''; // Limpar a seleção de arquivo
+          photoUploadInput.value = '';
         } else {
-          // Habilitar o campo de upload de foto
           photoUploadInput.disabled = false;
         }
+
       }
 
-      // Chama a função ao carregar a página para garantir que o estado inicial seja o correto
       togglePhotoUpload();
 
-      // Adiciona um evento de "change" ao checkbox
       useDefaultCheckbox.addEventListener('change', togglePhotoUpload);
     });
 
-     // Seleciona os elementos
     const photoUpload = document.getElementById('photoUpload');
     const profileImg = document.getElementById('profileImg');
     const useDefault = document.getElementById('useDefault');
 
-    // URL da imagem padrão
     const defaultPhotoUrl = "{{ asset('storage/uploads/defaultPhoto.jpg') }}";
 
-    // Adiciona evento ao input de upload de arquivo
     photoUpload.addEventListener('change', (event) => {
-        const file = event.target.files[0];
 
-        if (file && file.type.startsWith('image/')) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                profileImg.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
+      const file = event.target.files[0];
+
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          profileImg.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+        imagePreview.style.display = 'block';
+      }
+
     });
 
-    // Adiciona evento ao checkbox de usar foto padrão
     useDefault.addEventListener('change', (event) => {
-        if (event.target.checked) {
-            // Se marcado, exibe a foto padrão
-            profileImg.src = defaultPhotoUrl;
+      if (event.target.checked) {
 
-            // Opcional: desabilitar o input de upload para evitar confusão
-            photoUpload.disabled = true;
+        profileImg.src = defaultPhotoUrl;
+
+        photoUpload.disabled = true;
+      } else {
+
+        photoUpload.disabled = false;
+
+      }
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+      const selectElement = document.getElementById('tags');
+
+      // Detecta quando o usuário clica em uma opção
+      selectElement.addEventListener('click', function (event) {
+        const clickedOption = event.target;
+        const isSelected = clickedOption.selected;
+
+        // Se a opção for selecionada, ela será mantida
+        if (isSelected) {
+          clickedOption.selected = true;
         } else {
-            // Se desmarcado, habilita o input de upload novamente
-            photoUpload.disabled = false;
-
-            // Opcional: pode retornar para uma imagem anterior se necessário
+          // Caso contrário, será desmarcada
+          clickedOption.selected = false;
         }
+      });
     });
   </script>
 </body>

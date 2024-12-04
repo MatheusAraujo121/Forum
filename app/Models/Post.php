@@ -13,21 +13,14 @@ class Post extends Model
         'user_id'
     ];
 
-    // Relacionamento polimórfico
     public function postable()
     {
-        return $this->morphTo(); // Determina o modelo associado (Comment ou Topic)
+        return $this->morphTo(); 
     }
 
-    // Relacionamento com User
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Relacionamento com Rate
-    public function rates()
-    {
-        return $this->hasMany(Rate::class);
-    }
 }

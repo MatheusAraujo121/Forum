@@ -49,18 +49,8 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    public function rates()
+    public function comments()
     {
-        return $this->hasMany(Rate::class);
-    }
-
-    public function isModerador()
-    {
-        return $this->role === 'moderator' || $this->role === 'admin';
-    }
-    
-    public function isAdmin()
-    {
-        return $this->role === 'admin';
+        return $this->hasMany(Comment::class); 
     }
 }
