@@ -478,14 +478,16 @@ hr{
   -moz-transition: box-shadow 0.2s ease-in;
   transition: box-shadow 0.2s ease-in;
 }
-.logo-img{
+.logo-img {
   margin-left: 70%;
   margin-top: 3%;
-  max-width: 100%; 
-  max-height: 78px; 
-  width: auto; 
+  max-width: none; 
+  width: 150px; /* Defina uma largura inicial */
   height: auto;
+  transform: scale(1.8); /* Ajuste o fator de escala para aumentar a imagem */
+  transform-origin: center; /* Define o ponto de origem para o zoom no centro */
 }
+
 .bx-menu{
   color: white;
   font-size: 350%;
