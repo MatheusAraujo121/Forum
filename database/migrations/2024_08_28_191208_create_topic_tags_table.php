@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('tag_id');
             $table->unsignedBigInteger('topic_id');
-            $table->foreign('tag_id')->references('id')->on('tags');
-            $table->foreign('topic_id')->references('id')->on('topics');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');;
+            $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');;
 
             //$table->foreignId('tag_id')->constrained();
             //$table->foreignId('topic_id')->constrained();
