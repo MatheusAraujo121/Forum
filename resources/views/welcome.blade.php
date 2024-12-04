@@ -6,6 +6,9 @@
 @section('content')
   @if(Auth::check())
     <h1 class="welcome-text centered">Bem-vindo, {{ Auth::user()->name }}!</h1>
+  @else
+    <h1 class="welcome-text centered">Bem-vindo, faça login para continuar!</h1>
+  @endif
     <br>
     <h3 class="welcome-text centered">Últimas postagens ⬇️</h3>
     @foreach($topics as $topic)
@@ -55,5 +58,4 @@
           @endforeach
       </div>
     @endforeach
-  @endif
 @endsection
