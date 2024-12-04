@@ -37,12 +37,27 @@ Ter o visual studio code instalado 👍
 
 Atualmente, só é possível rodar o projeto localmente, com os arquivos em seu computador. Para que consiga rodar e usufruir do projeto, siga estas etapas:
 
-### Baixando diretamente pelo github
-1. Baixe o projeto aqui clicando no botão verde escrito "<>CODE" e então em "Download ZIP"
-2. Extraia o ZIP num local apropriado
-3. Com o Visual Studio Code, abra a pasta "forum"
-4. Dentro do Visual Studio, abra o terminal (Crtl + Shift + ') e digite "php artisan serve"
-5. Quando estiver tudo pronto aparecerá uma mensagem dizendo que o servidor está rodando no seu ip. Segure Crtl e clique no ip para abrir o projeto(Alternativamente você pode copiar e colar o ip no seu navegador).
+
+
+### Baixando diretamente pelo GitHub
+Baixe o projeto aqui clicando no botão verde escrito "<>CODE" e então em "Download ZIP".
+Extraia o ZIP em um local apropriado.
+Com o Visual Studio Code, abra a pasta "forum".
+Dentro do Visual Studio, abra o terminal (Ctrl + Shift + ') e digite o comando:
+bash
+Copiar código
+php artisan migrate --seed
+Esse comando irá criar as tabelas necessárias no banco de dados e adicionar dados iniciais para que você possa começar a usar o sistema. É importante ressaltar que o sistema permite criar tópicos, adicionar comentários aos tópicos, conectar tags aos tópicos para facilitar a busca por conteúdo relacionado, e também associar categorias aos tópicos, criando uma estrutura bem organizada para o conteúdo.
+Em seguida, ainda no terminal, digite o comando:
+bash
+Copiar código
+php artisan serve
+Quando o servidor estiver rodando corretamente, aparecerá uma mensagem indicando o IP do servidor. Segure Ctrl e clique no IP para abrir o projeto no seu navegador (Alternativamente, você pode copiar e colar o IP no seu navegador).
+
+###Observação
+Para adicionar imagens é necessário remover o link digitando rm public/storage no terminal, e reinstaurar o link com php artisan storage:link
+
+
 
 ### Baixando pelo Git Clone
 1. Crie uma pasta de qualquer nome na localização desejada e abra ela com o Visual Studio
