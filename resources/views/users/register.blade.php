@@ -30,14 +30,15 @@
     </div>
   </div>
   <div class="input-group">
-    <label for="image" class="form-label">Imagem</label>
+    <label for="image" class="form-label">Foto</label>
     <div class="image-post" id="imagePreview" style="display: none;">
       <img id="profileImg" src="" alt="profileImg">
     </div>
     <br>
+    <input type="file" name="photo" accept="image/*" id="photoUpload">
+    @error('photo') <span>{{ $message }}</span> @enderror
   </div>
-  <input type="file" name="photo">
-  @error('photo') <span>{{ $message }}</span> @enderror
+  <br>
   <button type="submit" value="Registrar" class="signs">Cadastrar</button>
 </form>
 <br>

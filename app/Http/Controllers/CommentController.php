@@ -2,83 +2,105 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
-use App\Models\Topic;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use App\Models\Comment;
+use App\Models\Post;
+use App\Models\Topic;
 
 class CommentController extends Controller
 {
     public function index()
     {
-        $comments = Comment::with('topic')->get();
+        $comments = Comment::with('post')->get();
         return view('comments.listComments', compact('comments'));
     }
 
-    public function create()
+    public function create($id)
     {
-        $topics = Topic::all();
-        //dd($topics);
-        return view('comments.createComment', compact('topics'));
+        $topic = Topic::findOrFail($id);
+        return view('comments.createComment', compact('topic')); 
     }
+
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $userId = Auth::id();
+
+        $request->validate([
             'content' => 'required|string',
             'topic_id' => 'required|exists:topics,id',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        $imagePath = null;
         if ($request->hasFile('image')) {
-            // Salva a imagem no diretório 'images/comments' e obtém o caminho
-            $imagePath = $request->file('image')->store('storage', 'public');
-            $validated['image_path'] = $imagePath;
+            $file = $request->file('image');
+            $fileName = uniqid() . '-' . $file->getClientOriginalName();
+            $imagePath = $file->storeAs('uploads/comments', $fileName);
         }
 
+        $comment = Comment::create([
+            'content' => $request->content,
+            'topic_id' => $request->topic_id,
+        ]);
 
-        Comment::create($validated);
-        return redirect()->route('viewComment')->with('message', 'Comentário criado com sucesso!');
+        $comment->post()->create([
+            'user_id' => $userId,
+            'image' => $imagePath,
+        ]);
+
+        return redirect()->route('viewComment')->with('success', 'Comment created successfully!');
     }
 
     public function edit($id)
     {
-        $comment = Comment::findOrFail($id);
+        $comment = Comment::with('post')->findOrFail($id);
         $topics = Topic::all();
         return view('comments.editComment', compact('comment', 'topics'));
     }
 
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
+        $comment = Comment::findOrFail($id);
+
+        $request->validate([
             'content' => 'required|string',
-            'topic_id' => 'required|exists:topics,id',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'topic_id' => 'exists:topics,id',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $comment = Comment::findOrFail($id);
-       
+        $comment->update([
+            'content' => $request->content,
+        ]);
+
         if ($request->hasFile('image')) {
-            // Apaga a imagem antiga se houver
-            if ($comment->image_path) {
-                \Storage::delete('public/' . $comment->image_path);
+            $file = $request->file('image');
+            $fileName = uniqid() . '-' . $file->getClientOriginalName();
+            $imagePath = $file->storeAs('uploads/comments', $fileName);
+
+            if ($comment->post->image && $comment->post->image !== 'uploads/defaultComment.jpg') {
+                Storage::delete($comment->post->image);
             }
-    
-            // Salva a nova imagem
-            $imagePath = $request->file('image')->store('images/comments', 'public');
-            $validated['image_path'] = $imagePath;
+
+            $comment->post->update(['image' => $imagePath]);
         }
 
-        $comment->update($validated);
-        
-
-        return redirect()->route('viewComment')->with('message', 'Comentário atualizado com sucesso!');
+        return redirect()->route('viewComment')->with('success', 'Comment updated successfully!');
     }
 
     public function destroy($id)
     {
-        $comment = Comment::findOrFail($id);
+        $comment = Comment::with('post')->findOrFail($id);
+
+        if ($comment->post->image && $comment->post->image !== 'uploads/defaultComment.jpg') {
+            Storage::delete($comment->post->image);
+        }
+
+        $comment->post()->delete();
         $comment->delete();
 
-        return redirect()->route('viewComment')->with('message', 'Comentário excluído com sucesso!');
+        return redirect()->route('viewComment')->with('success', 'Comment deleted successfully!');
     }
 }

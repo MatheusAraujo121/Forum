@@ -8,30 +8,34 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function listCategories(Request $request){
+    public function listCategories(Request $request)
+    {
         $categories = Category::all();
-        return view('category.listCategories', compact('categories')); // compact('categories') faz o mesmo que ['category' => $category]
+        return view('category.listCategories', compact('categories'));
     }
 
-    public function editCategory(Request $request, $uid){
+    public function editCategory(Request $request, $uid)
+    {
         $category = Category::where('id', $uid)->first();
         return view('category.editCategory', ['category' => $category]);
     }
 
-    public function viewCategory(Request $request, $uid){
-        $category = Category::where('id', $uid)->first(); //findOrFai($id)
+    public function viewCategory(Request $request, $uid)
+    {
+        $category = Category::where('id', $uid)->first(); 
         return view('category.viewCategory', ['category' => $category]);
     }
 
-    public function createCategory(Request $request){
-        if($request->method() === 'GET'){
+    public function createCategory(Request $request)
+    {
+        if ($request->method() === 'GET') {
 
             return view('category.createCategory');
-        }else{
+        } else {
 
             $validated = $request->validate([
-                'title'=> 'required|string',
-                'description'=> 'required|string'
+                'title' => 'required|string',
+                'description' => 'required|string'
             ]);
 
             $category = Category::create($validated);
@@ -40,25 +44,26 @@ class CategoryController extends Controller
         }
     }
 
-    public function updateCategory(Request $request, $uid){
-        //procurar o usuário no banco
-            $category = Category::where('id', $uid)->first();
-            $category->title = $request->title;
-            $category->description = $request->description;
+    public function updateCategory(Request $request, $uid)
+    {
+        $category = Category::where('id', $uid)->first();
+        $category->title = $request->title;
+        $category->description = $request->description;
 
-            $request->validate([
-                'title'=> 'string',
-                'description'=> 'string'
-            ]);
-            $category->save();
-            return redirect()->route('ViewCategory', [$category -> id])
-                    ->with('message', 'Atualizado com sucesso!');
+        $request->validate([
+            'title' => 'string',
+            'description' => 'string'
+        ]);
+        $category->save();
+        return redirect()->route('ViewCategory', [$category->id])
+            ->with('message', 'Atualizado com sucesso!');
     }
 
-    public function deleteCategory(Request $request, $uid){
+    public function deleteCategory(Request $request, $uid)
+    {
         $category = Category::where('id', $uid)->delete();
 
         return redirect()->route('listCategories')
-                ->with('message', 'Deletado com sucesso!');
+            ->with('message', 'Deletado com sucesso!');
     }
 }

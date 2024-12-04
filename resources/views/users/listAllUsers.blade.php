@@ -17,15 +17,15 @@
     </thead>
     <tbody>
         @foreach ($users as $user)
-        <tr>
-            <td>{{$user->id}}
-            <td>{{$user->name}}
-            <td>{{$user->email}}
-            <td>
-                <div class="user-picture">
-                    <img src="{{ asset('storage/' .$user->photo) }}" alt="profileImg">
-                </div>           
-                @endforeach
+            <tr>
+                <td>{{$user->id}}
+                <td>{{$user->name}}
+                <td>{{$user->email}}
+                <td>
+                    <div class="user-picture">
+                        <img src="{{ asset('storage/' . $user->photo) }}" alt="profileImg">
+                    </div>
+        @endforeach
     </tbody>
 </table>
 @endsection

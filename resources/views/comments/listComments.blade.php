@@ -22,7 +22,15 @@
                 <td>{{ $comment->id }}</td>
                 <td>{{ $comment->content }}</td>
                 <td>{{ $comment->topic->title }}</td>
-                <td>{{ $comment->post->image }}</td>
+                @if($comment->post->image == null)
+                    <td>Sem imagem</td>
+                @else
+                    <td>
+                        <div class="topic-image">
+                            <img src="{{ asset('storage/' . $comment->post->image) }}" alt="Imagem do comentário">
+                        </div>
+                    </td>
+                @endif
                 <td>
                     <div class="opc">
                         <a class="lgn-3" href="{{ route('editComment', [$comment->id]) }}">
