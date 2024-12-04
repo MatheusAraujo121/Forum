@@ -54,7 +54,7 @@ Copiar código
 php artisan serve
 Quando o servidor estiver rodando corretamente, aparecerá uma mensagem indicando o IP do servidor. Segure Ctrl e clique no IP para abrir o projeto no seu navegador (Alternativamente, você pode copiar e colar o IP no seu navegador).
 
-###Observação
+### Observação
 Para adicionar imagens é necessário remover o link digitando rm public/storage no terminal, e reinstaurar o link com php artisan storage:link
 
 
