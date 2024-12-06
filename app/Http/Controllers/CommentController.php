@@ -23,7 +23,6 @@ class CommentController extends Controller
         return view('comments.createComment', compact('topic')); 
     }
 
-
     public function store(Request $request)
     {
         $userId = Auth::id();
@@ -51,7 +50,7 @@ class CommentController extends Controller
             'image' => $imagePath,
         ]);
 
-        return redirect()->route('viewComment')->with('success', 'Comment created successfully!');
+        return redirect()->route('viewComment')->with('success', 'Comentário criado com sucesso!');
     }
 
     public function edit($id)
@@ -87,7 +86,7 @@ class CommentController extends Controller
             $comment->post->update(['image' => $imagePath]);
         }
 
-        return redirect()->route('viewComment')->with('success', 'Comment updated successfully!');
+        return redirect()->route('viewComment')->with('success', 'Comentário atualizado com sucesso!');
     }
 
     public function destroy($id)
@@ -101,6 +100,6 @@ class CommentController extends Controller
         $comment->post()->delete();
         $comment->delete();
 
-        return redirect()->route('viewComment')->with('success', 'Comment deleted successfully!');
+        return redirect()->route('viewComment')->with('success', 'Comentário deletado com sucesso!');
     }
 }

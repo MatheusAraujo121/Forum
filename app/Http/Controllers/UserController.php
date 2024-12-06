@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\validator;
 use App\Models\User;
+use App\Models\Comment;
 
 class UserController extends Controller
 {
@@ -17,11 +18,6 @@ class UserController extends Controller
     {
         $users = User::all();
         return view('users.listAllUsers', ['users' => $users]);
-    }
-    public function listUsersComplaint(Request $request)
-    {
-        $users = User::all();
-        return view('users.complaintUser', ['users' => $users]);
     }
 
     public function listUserByID(Request $request, $uid)
@@ -81,7 +77,7 @@ class UserController extends Controller
             'name' => 'string|max:255',
             'email' => 'string|email|max:255',
             'password' => 'string|min:8|confirmed|nullable',
-            'photo' => 'mimes:jpeg,png,jpg,gif'
+            'photo' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
         $user->save();
         return redirect()->route('routeListUserByIDS', [$user->id])
@@ -90,16 +86,31 @@ class UserController extends Controller
 
     public function deleteUser(Request $request, $uid)
     {
-        $user = User::where('id', $uid)->first();
+        $user = User::find($uid);
 
-        if ($user->photo == 'uploads/defaultPhoto.jpg') {
-            $user->update(['photo' => null]);
+        foreach ($user->posts as $post) {
+            if ($post->isComment()) {
+                $comment = $post->postable;
+                $comment->delete();
+            }
+
+            if ($post->isTopic()) {
+                $topic = $post->postable; 
+                $topic->comments()->delete();
+                $topic->tags()->detach(); 
+                $topic->delete(); 
+            }
+
+            $post->delete();
         }
 
-        $user = User::where('id', $uid)->delete();
+        if ($user->photo && $user->photo != 'uploads/defaultPhoto.jpg' && Storage::exists($user->photo)) {
+            Storage::delete($user->photo);
+        }
 
-        return redirect()->route('FirstPage')
-            ->with('message', 'Deletado com sucesso!');
+        $user->delete();
+
+        return redirect()->route('FirstPage')->with('message', 'Deletado com sucesso!');
     }
 
     public function registerUser(Request $request)
@@ -131,7 +142,7 @@ class UserController extends Controller
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:8|confirmed',
-                'photo' => 'mimes:jpeg,png,jpg,gif'
+                'photo' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048'
             ]);
 
             $user = User::create([

@@ -10,9 +10,9 @@ class Topic extends Post
     use HasFactory;
 
     protected $fillable = [
-        'title', 
-        'description', 
-        'status', 
+        'title',
+        'description',
+        'status',
         'category_id'
     ];
 
@@ -28,7 +28,7 @@ class Topic extends Post
 
     public function comments()
     {
-        return $this->hasMany(Comment::class)->distinct();
+        return $this->hasMany(Comment::class);
     }
 
     public function tags()

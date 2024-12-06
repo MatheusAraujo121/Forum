@@ -55,14 +55,14 @@ class TopicController extends Controller
 
         $topic->post()->create([
             'user_id' => $userId,
-            'image' => $imagePath ?? 'uploads/defaultPhoto.jpg', 
+            'image' => $imagePath ?? null,
         ]);
 
         if ($request->has('tags')) {
             $topic->tags()->attach($request->tags); 
         }
 
-        return redirect()->route('viewTopic')->with('success', 'Topic created successfully!');
+        return redirect()->route('viewTopic')->with('success', 'Tópico criado com sucesso!');
     }
 
 
@@ -98,7 +98,7 @@ class TopicController extends Controller
             $topic->tags()->sync($request->tags); 
         }
 
-        return redirect()->route('viewTopic')->with('success', 'Topic updated successfully!');
+        return redirect()->route('viewTopic')->with('success', 'Tópico atualizada com sucesso!');
     }
 
 
@@ -114,7 +114,7 @@ class TopicController extends Controller
         $topic->post()->delete();
         $topic->delete();
 
-        return redirect()->route('viewTopic')->with('success', 'Topic deleted successfully!');
+        return redirect()->route('viewTopic')->with('success', 'Tópico deletado com sucesso!');
     }
     public function welcome()
     {

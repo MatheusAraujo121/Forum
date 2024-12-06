@@ -25,11 +25,15 @@
                 <td>{{ $topic->id }}</td>
                 <td>{{ $topic->title }}</td>
                 <td>{{ $topic->description }}</td>
+                @if($topic->post?->image == null)
+                    <td>Sem imagem</td>
+                @else
                 <td>
                     <div class="topic-image">
                         <img src="{{ asset('storage/' . $topic->post->image) }}" alt="profileImg">
                     </div>
                 </td>
+                @endif
                 <td>{{ $topic->status }}</td>
                 <td>{{ $topic->category->title }}</td>
                 <td>
